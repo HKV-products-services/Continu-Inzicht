@@ -1,0 +1,22 @@
+.react-swipeable-view-container > div {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+.swipeableview, .react-swipeable-view-container, .swipeableview-slide {
+  display: flex;
+  flex-grow: 1;
+  max-width: 100%;
+  justify-content: space-between;
+}
+.swipeableview-table {
+  max-height: 100%;
+}
+.swipeableview .vega-embed {
+  padding: 0;
+}
+.swipeableview .vega-embed .vega-actions-wrapper {
+  margin-right: 8px;
+}

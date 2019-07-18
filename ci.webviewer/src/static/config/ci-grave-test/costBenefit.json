@@ -1,0 +1,137 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Maatschappelijke kosten/baten analyse.",  
+  "autosize": {"type": "fit", "resize": true},
+  "padding": 5,
+  "width": 600,
+  "height": 300,
+  "style": "cell",
+  "signals": [
+    {"name": "yLabel", "value": "Ratio"},
+    {"name": "xLabel", "value": "Hours"},
+    {"name": "executiontime", "value": 3},
+    {"name": "kbratio", "value": 1.0}
+  ],
+  "data": [
+    {
+      "name": "source_0",
+      "url": "",
+      "format": {"type": "json"}
+    }
+  ],
+  "marks": [
+    {
+      "name": "marks",
+      "type": "line",
+      "style": ["line"],
+      "sort": {"field": "datum[\"hours\"]", "order": "descending"},
+      "from": {"data": "source_0"},
+      "encode": {
+        "update": {
+          "stroke": {"value": "#4c78a8"},
+          "tooltip": {
+            "signal": "{\"datetime\": timeFormat(datum[\"datetime\"], '%b %d, %Y'), \"ratio\": format(datum[\"ratio\"], \"\")}"
+          },
+          "x": {"scale": "x", "field": "hours"},
+          "y": {"scale": "y", "field": "ratio"},
+          "defined": {
+            "signal": "datum[\"datetime\"] !== null && !isNaN(datum[\"datetime\"]) && datum[\"ratio\"] !== null && !isNaN(datum[\"ratio\"])"
+          }
+        }
+      }
+    },
+    {
+      "type": "rule",
+      "encode": {
+        "enter": {"stroke": {"value": "red"}, "strokeWidth": {"value": 1}},
+        "update": {
+          "y": {"scale": "y", "signal": "kbratio"},
+          "x": {"value": 0},
+          "x2": {"signal": "width"}
+        }
+      }
+    },
+    {
+      "type": "rule",
+      "encode": {
+        "enter": {
+          "stroke": {"value": "red"},
+          "strokeWidth": {"value": 1},
+          "strokeDash": {"value": [8, 8]}
+        },
+        "update": {
+          "y": {"value": 0},
+          "y2": {"signal": "height"},
+          "x": {"scale": "x", "signal": "executiontime"}
+        }
+      }
+    }
+  ],
+  "scales": [
+    {
+      "name": "x",
+      "type": "linear",
+      "domain": { "fields":  [
+        {"data": "signal", "signal": "executiontime"},
+        {"data": "source_0", "field": "hours"}]},  
+      "range": [0, {"signal": "width"}]
+    },
+    {
+      "name": "y",
+      "type": "linear",
+      "domain": { "fields":  [
+        {"data": "signal", "signal": "kbratio"},
+        {"data": "source_0", "field": "ratio"}]},
+      "range": [{"signal": "height"}, 0],
+      "nice": true,
+      "zero": true
+    }
+  ],
+  "axes": [
+    {
+      "scale": "x",
+      "orient": "bottom",
+      "grid": false,
+      "title": {"signal": "xLabel"},
+      "labelFlush": true,
+      "labelOverlap": true,
+      "tickCount": {"signal": "ceil(width/40)"},
+      "zindex": 1
+    },
+    {
+      "scale": "x",
+      "orient": "bottom",
+      "gridScale": "y",
+      "grid": true,
+      "tickCount": {"signal": "ceil(width/40)"},
+      "domain": false,
+      "labels": false,
+      "maxExtent": 0,
+      "minExtent": 0,
+      "ticks": false,
+      "zindex": 0
+    },
+    {
+      "scale": "y",
+      "orient": "left",
+      "grid": false,
+      "title": {"signal": "yLabel"},
+      "labelOverlap": true,
+      "tickCount": {"signal": "ceil(height/40)"},
+      "zindex": 1
+    },
+    {
+      "scale": "y",
+      "orient": "left",
+      "gridScale": "x",
+      "grid": true,
+      "tickCount": {"signal": "ceil(height/40)"},
+      "domain": false,
+      "labels": false,
+      "maxExtent": 0,
+      "minExtent": 0,
+      "ticks": false,
+      "zindex": 0
+    }
+  ]
+}

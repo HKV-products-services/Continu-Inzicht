@@ -1,0 +1,53 @@
+{
+  "application": [
+    {
+      "id": 1,
+      "name": "Continu Inzicht",
+      "customer": "Rivierenland",
+      "locale": "nl",
+      "menuType": "list",
+      "percentages": true,
+      "schema": "continuinzicht_wsrl",
+      "enbankmentStatus": true,
+      "startMenuActive": true,
+      "startMenuStyle": "icons",
+      "startMenu": [
+        {
+          "active": true,
+          "index": 0,
+          "label": "Real time inzicht",
+          "key": "",
+          "apptype": "realtime"
+        },
+        {
+          "active": true,
+          "index": 1,
+          "label": "What-if inzicht",
+          "key": "",
+          "apptype": "whatif"
+        },
+        {
+          "active": true,
+          "index": 2,
+          "label": "Rapportages",
+          "key": "/rapportages",
+          "apptype": "whatif"
+        },
+        {
+          "active": false,
+          "index": 3,
+          "label": "Risicogestuurd beheer",
+          "key": "",
+          "apptype": "whatif"
+        },
+        {
+          "active": false,
+          "index": 4,
+          "label": "Beslissen onder onzekerheid",
+          "key": "",
+          "apptype": "whatif"
+        }
+      ]
+    }
+  ]
+}

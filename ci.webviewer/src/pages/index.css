@@ -1,0 +1,318 @@
+/* General page & map styling */
+html, body {
+  height: 100%;
+  padding: 0 !important;
+  margin: 0;
+  background: #fafafa;
+}
+.align-left {
+  text-align: left;
+}
+.align-center {
+  text-align: center;
+}
+.align-right {
+  text-align: right;
+}
+.mangrove-container {
+  display: flex;
+  background: #fafafa;
+  flex-direction: column;
+  justify-Content: center;
+  height: 100%;
+  text-align: center;
+  position: relative;
+}
+.mangrove-image {
+  margin: 16px auto;
+  width: 256px;
+}
+.mangrove-tekst {
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 1.5rem;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  line-height: 1.33;
+  letter-spacing: 0em;
+  margin: 0;
+}
+body #vg-tooltip-element {
+  z-index: 1500;
+}
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+.errorContainer p, .errorMessage {
+  font-family: sans-serif;
+  font-size: 1.25rem;
+  margin: 20px;
+}
+ul {
+  list-style: none;
+  margin: 8px 0;
+  padding: 0 16px;
+}
+ul li::before {
+  content: "\2022";
+  color: #2196f3;
+  font-weight: bold;
+  display: inline-block;
+  width: 1.35rem;
+  margin-left: -1.35rem;
+}
+#__next .introjs-fixParent {
+  z-index: 9999999 !important;
+}
+/* INTRO JS STYLING */
+.introjs-fixedTooltip .introjs-bullets {
+  pointer-events: none;
+}
+.introjs-fixedTooltip .introjs-bullets ul {
+  margin: 0;
+}
+.introjs-fixedTooltip .introjs-bullets ul li::before {
+  content: "";
+  display: none;
+}
+.introjs-fixedTooltip .introjs-bullets ul li a {
+  background: #ccc;
+}
+.introjs-fixedTooltip .introjs-bullets ul li a.active {
+  background: #2196f3;
+}
+.introjs-fixedTooltip .introjs-helperNumberLayer {
+  left: 0;
+  top: 0;
+}
+.introjs-fixedTooltip .introjs-tooltip {
+  min-width: 400px;
+  max-width: 900px;
+  padding: 16px;
+}
+.introjs-fixedTooltip .large-tooltip {
+  min-width: 720px;
+  max-width: 1100px;
+}
+.introjs-tooltipbuttons .introjs-button, .introjs-tooltipbuttons .introjs-button:focus {
+  font-size: 0.875rem;
+  min-width: 64px;
+  background-color: #2196f3;
+  color: #fff;
+  box-sizing: border-box;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  line-height: 1.75;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 500;
+  border-radius: 4px;
+  letter-spacing: 0.02857em;
+  text-transform: uppercase;
+  border: 0;
+  cursor: pointer;
+  display: inline-flex;
+  outline: none;
+  position: relative;
+  margin: 0 0 0 8px;
+  align-items: center;
+  user-select: none;
+  vertical-align: middle;
+  justify-content: center;
+  -moz-appearance: none;
+  text-decoration: none;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  text-shadow: none;
+  background-image: none;
+}
+.introjs-tooltipbuttons .introjs-button:active, .introjs-tooltipbuttons .introjs-button:hover {
+  background-image: none;
+  background-color: #1976d2;
+  color: #fff;
+}
+.introjs-tooltipbuttons .introjs-disabled, .introjs-tooltipbuttons .introjs-disabled:hover, .introjs-tooltipbuttons .introjs-disabled:focus, .introjs-tooltipbuttons .introjs-disabled:active {
+  background-color: #f4f4f4;
+  color: #9a9a9a;
+  pointer-events: none;
+}
+/* ROWS TOOLTIP */
+.introjs-fixedTooltip .rows .introjs-tooltiptext {
+  display: flex;
+}
+.introjs-fixedTooltip .rows .introjs-tooltiptext img {
+  margin: 0 0 8px 8px;
+}
+/* DEFAULT TOOLTIP */
+.introjs-fixedTooltip .introjs-tooltip .introjs-tooltiptext>div {
+  font-size: 14px;
+}
+.introjs-fixedTooltip .introjs-tooltip .introjs-tooltiptext>div, .introjs-fixedTooltip .introjs-tooltip .introjs-tooltiptext div h3 {
+  margin: 0 0 8px 0;
+}
+.introjs-fixedTooltip .introjs-tooltip .introjs-tooltiptext div h3 {
+  font-weight: 500;
+}
+.introjs-fixedTooltip .introjs-tooltip img {
+  width: 500px;
+  max-height: 280px;
+  display: block;
+  margin: 0 auto 8px;
+  object-fit: contain;
+}
+.introjs-helperLayer {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+div[role=presentation] {
+  z-index: 9999999 !important;
+}
+div[role=document] table tr {
+  height: 48px;
+}
+div[role=document] table td {
+  padding: 0 4px;
+  /* font-size: 0.8125rem; */
+}
+div[role=document] table td:last-of-type {
+  padding: 0;
+}
+.leaflet-pane .leaflet-popup-content table tr {
+  height: unset;
+}
+.leaflet-pane .leaflet-popup-content table td {
+  padding: 0 4px 0 0;
+  font-size: unset;
+}
+.leaflet-pane .leaflet-popup-content table td:last-of-type {
+  padding: 0;
+}
+.hidden {
+  visibility: hidden;
+}
+.displayNone {
+  display: none;
+}
+#__next {
+  height: inherit;
+}
+#__next .leaflet-popup-pane, .leaflet-popup-pane {
+  pointer-events: none;
+}
+#__next .leaflet-left, #__next .leaflet-right {
+  transition: 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+}
+#__next .leaflet-control-scale {
+  margin-left: 0;
+  margin-bottom: 0;
+}
+#__next .waterlevelTop {
+  margin-top: 8px;
+}
+#__next .moveL {
+  margin-left: 368px;
+}
+#__next .moveLExtra {
+  margin-left: 62px;
+}
+#__next .moveR {
+  margin-right: 360px;
+}
+#__next .moveB {
+  margin-bottom: 99px;
+}
+#__next .moveBHhnk {
+  margin-bottom: 137px;
+}
+#__next .moveBExtra {
+  margin-bottom: 450px;
+}
+#__next .svg-icon-alt {
+  pointer-events: none;
+}
+#menu- > div:last-of-type{
+  width: auto;
+}
+strong, b {
+  font-weight: 500;
+}
+.vega-embed {
+  padding-right: 0 !important;
+}
+.vega-embed summary {
+  right: 12px !important;
+}
+.vega-embed .vega-actions {
+  right: 4px !important;
+}
+table thead tr th {
+  background: #2196f3;
+  color: white;
+  width: inherit;
+  white-space: nowrap;
+}
+.swipeableview-slide .dialog-icon-large {
+  font-size: 7.5rem;
+  width: 100%;
+}
+.swipeableview-slide .dialog-icon-default {
+  font-size: 4rem;
+}
+.swipeableview-slide .dialog-icon-small {
+  font-size: 3rem;
+}
+.swipeableview-slide .dialog-text-large {
+  font-size: 4rem;
+}
+.swipeableview-slide .dialog-icon-border path:last-of-type {
+  stroke: #000;
+  stroke-opacity: 0.7;
+  stroke-width: 0.3;
+}
+.dialog-content h6 {
+  font-size: 1rem;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: 0.0075em;
+  margin: 8px 0 0 0;
+}
+.textFieldOutlined input {
+  /* font-size: 0.8125rem; */
+  font-size: 0.875rem;
+  padding: 8px;
+}
+@media only screen and (max-width: 1600px) {
+  .introjs-fixedTooltip .introjs-tooltip .introjs-tooltiptext>div {
+    font-size: 13px;
+  }
+  .introjs-fixedTooltip .rows .introjs-tooltiptext > div {
+    max-width: 600px;
+  }
+  .introjs-fixedTooltip .introjs-tooltip img {
+    max-width: 350px;
+    max-height: 200px;
+  }
+}
+@media only screen and (min-width: 600px) {
+  div[role=document] table td {
+    padding: 0 12px;
+  }
+  div[role=document] table td:last-of-type {
+    padding: 0 12px;
+  }
+  .swipeableview-slide .dialog-icon-large {
+    font-size: 9.5rem;
+  }
+  .swipeableview-slide .dialog-icon-default {
+    font-size: 6rem;
+  }
+  .swipeableview-slide .dialog-text-large {
+    font-size: 7rem;
+  }
+}

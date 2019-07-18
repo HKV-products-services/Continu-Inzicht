@@ -1,0 +1,39 @@
+.startmenu-container {
+  text-align: center;
+  padding: 0 !important;
+}
+.startmenu-container > div:nth-child(3) > div:nth-child(1) {
+  background: transparent;
+  box-shadow: none;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  border-radius: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  /* justify-content: space-between; */
+  justify-content: center;
+}
+.card-content a {
+  color: #2196f3;
+  text-decoration: none;
+}
+.card-content a:hover, .card-content a:focus { 
+  color: #1976d2;
+  text-decoration: underline;
+}
+.card-content ul li {
+  display: flex;
+}
+.card-content ul li span {
+  width: 100%;
+  text-align: left;
+}
+@media only screen and (min-width: 960px) {
+  .startmenu-container > div:nth-child(3) > div:nth-child(1) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* max-width: 960px; */
+    height: unset;
+  }
+}

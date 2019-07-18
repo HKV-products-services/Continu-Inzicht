@@ -1,0 +1,574 @@
+{
+  "width": 200,
+  "height": 200,
+  "autosize": {
+    "type": "fit",
+    "resize": true
+  },
+  "padding": {
+    "top": 0,
+    "right": 10,
+    "left": 10,
+    "bottom": 0
+  },
+  "signals": [
+    {
+      "name": "rp_bind",
+      "value": "RSCH"
+    },
+    {
+      "name": "legend_orient",
+      "value": "right"
+    },
+    {
+      "name": "risk_parameter",
+      "update": "rp_bind"
+    },
+    {
+      "name": "x_step",
+      "update": "(width / 4)"
+    },
+    {
+      "name": "width_bar",
+      "update": "bandspace(domain('x').length, 0.1, 0.05) * x_step"
+    }
+  ],
+  "data": [
+    {
+      "name": "source",
+      "values": {
+        "areariskdata": [
+          {
+            "riskvalues": [
+              {
+                "momentid": 0,
+                "parameterid": 8,
+                "datetime": 0
+              }
+            ],
+            "conditions": [
+              {
+                "upperboundary": 1000,
+                "lowerboundary": 0.0001,
+                "description": "Het risico is niet hoger dan normaal",
+                "color": "#00CC00",
+                "parameterid": 8
+              },
+              {
+                "upperboundary": 2000,
+                "lowerboundary": 1000,
+                "description": "groot",
+                "color": "#E2E100",
+                "parameterid": 8
+              },
+              {
+                "upperboundary": 3500,
+                "lowerboundary": 2000,
+                "description": "zeer groot",
+                "color": "#ff6600",
+                "parameterid": 8
+              },
+              {
+                "upperboundary": 999999,
+                "lowerboundary": 3500,
+                "description": "extreem",
+                "color": "#ff0000",
+                "parameterid": 8
+              }
+            ],
+            "parameter": {
+              "id": 8,
+              "code": "RSCH"
+            }
+          }
+        ]
+      },
+      "format": {
+        "type": "json"
+      }
+    },
+    {
+      "name": "parameter",
+      "source": "source",
+      "transform": [
+        {
+          "type": "flatten",
+          "fields": [
+            "areariskdata"
+          ],
+          "as": [
+            "areariskdata"
+          ]
+        },
+        {
+          "type": "project",
+          "fields": [
+            "areariskdata.parameter"
+          ],
+          "as": [
+            "parameter"
+          ]
+        },
+        {
+          "type": "project",
+          "fields": [
+            "parameter.id",
+            "parameter.code",
+            "parameter.name",
+            "parameter.unit",
+            "parameter.measured"
+          ],
+          "as": [
+            "id",
+            "code",
+            "name",
+            "unit",
+            "measured"
+          ]
+        },
+        {
+          "type": "filter",
+          "expr": "datum.code == risk_parameter"
+        }
+      ]
+    },
+    {
+      "name": "riskvalues",
+      "source": "source",
+      "transform": [
+        {
+          "type": "flatten",
+          "fields": [
+            "areariskdata"
+          ],
+          "as": [
+            "areariskdata"
+          ]
+        },
+        {
+          "type": "flatten",
+          "fields": [
+            "areariskdata.riskvalues"
+          ],
+          "as": [
+            "riskvalues"
+          ]
+        },
+        {
+          "type": "project",
+          "fields": [
+            "riskvalues.areaid",
+            "riskvalues.parameterid",
+            "riskvalues.momentid",
+            "riskvalues.datetime",
+            "riskvalues.value"
+          ],
+          "as": [
+            "areaid",
+            "parameterid",
+            "momentid",
+            "datetime",
+            "value"
+          ]
+        },
+        {
+          "type": "filter",
+          "expr": "datum.parameterid == data('parameter')[0].id"
+        },
+        {
+          "type": "formula",
+          "as": "datedesc",
+          "expr": "timeFormat(datetime(year(datum.datetime), month(datum.datetime), date(datum.datetime), hours(datum.datetime)), '%Y-%m-%d %H:%M')"
+        },
+        {
+          "type": "formula",
+          "as": "value",
+          "expr": "if(datum.value <= 0.0001, 0.0001, datum.value)"
+        }
+      ]
+    },
+    {
+      "name": "conditions",
+      "source": "source",
+      "transform": [
+        {
+          "type": "flatten",
+          "fields": [
+            "areariskdata"
+          ],
+          "as": [
+            "areariskdata"
+          ]
+        },
+        {
+          "type": "flatten",
+          "fields": [
+            "areariskdata.conditions"
+          ],
+          "as": [
+            "conditions"
+          ]
+        },
+        {
+          "type": "project",
+          "fields": [
+            "conditions.id",
+            "conditions.stateid",
+            "conditions.objectid",
+            "conditions.objecttype",
+            "conditions.upperboundary",
+            "conditions.lowerboundary",
+            "conditions.statevalue",
+            "conditions.name",
+            "conditions.description",
+            "conditions.color",
+            "conditions.parameterid"
+          ],
+          "as": [
+            "id",
+            "stateid",
+            "objectid",
+            "objecttype",
+            "upperboundary",
+            "lowerboundary",
+            "statevalue",
+            "name",
+            "description",
+            "color",
+            "parameterid"
+          ]
+        },
+        {
+          "type": "filter",
+          "expr": "datum.parameterid == data('parameter')[0].id"
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "xscale",
+      "type": "band",
+      "range": {
+        "step": {
+          "signal": "x_step"
+        }
+      },
+      "zero": true,
+      "domain": {
+        "data": "riskvalues",
+        "field": "datedesc"
+      },
+      "paddingInner": 0.2,
+      "paddingOuter": 0.05
+    },
+    {
+      "name": "xscale_axis",
+      "type": "band",
+      "range": "width",
+      "zero": true,
+      "domain": {
+        "data": "riskvalues",
+        "field": "datedesc"
+      },
+      "paddingInner": 0.2,
+      "paddingOuter": 0.05
+    },
+    {
+      "name": "yscale",
+      "type": "log",
+      "domain": {
+        "data": "conditions",
+        "fields": [
+          "lowerboundary",
+          "upperboundary"
+        ]
+      },
+      "range": "height"
+    },
+    {
+      "name": "legend_cd",
+      "type": "ordinal",
+      "domain": {
+        "data": "conditions",
+        "field": "description"
+      },
+      "range": {
+        "data": "conditions",
+        "field": "color"
+      }
+    },
+    {
+      "name": "moment",
+      "type": "ordinal",
+      "domain": {
+        "data": "riskvalues",
+        "field": "momentid"
+      },
+      "range": {
+        "scheme": "category20"
+      }
+    }
+  ],
+  "axes": [
+    {
+      "orient": "left",
+      "scale": "yscale",
+      "title": "Conditoneel risico",
+      "grid": false,
+      "encode": {
+        "ticks": {
+          "update": {
+            "stroke": {
+              "value": "#000"
+            },
+            "strokeWidth": {
+              "value": 0.5
+            }
+          }
+        },
+        "title": {
+          "update": {
+            "font": {
+              "value": "Verdana"
+            },
+            "fontSize": {
+              "value": 14
+            },
+            "fontWeight": {
+              "value": "normal"
+            },
+            "fill": {
+              "value": "#000"
+            }
+          }
+        },
+        "labels": {
+          "update": {
+            "font": {
+              "value": "Verdana"
+            },
+            "fontSize": {
+              "value": 14
+            },
+            "fontWeight": {
+              "value": "normal"
+            },
+            "fill": {
+              "value": "#000"
+            }
+          }
+        }
+      }
+    },
+    {
+      "orient": "bottom",
+      "scale": "xscale_axis",
+      "labelAngle": 0,
+      "labelAlign": "right",
+      "encode": {
+        "ticks": {
+          "update": {
+            "stroke": {
+              "value": "#000"
+            },
+            "strokeWidth": {
+              "value": 0.5
+            }
+          }
+        },
+        "title": {
+          "update": {
+            "font": {
+              "value": "Verdana"
+            },
+            "fontSize": {
+              "value": 14
+            },
+            "fontWeight": {
+              "value": "normal"
+            },
+            "fill": {
+              "value": "#000"
+            }
+          }
+        },
+        "labels": {
+          "update": {
+            "font": {
+              "value": "Verdana"
+            },
+            "fontSize": {
+              "value": 14
+            },
+            "fontWeight": {
+              "value": "normal"
+            },
+            "fill": {
+              "value": "#000"
+            },
+            "angle": {"value": 340}
+          }
+        }
+      }
+    }
+  ],
+  "marks": [
+    {
+      "name": "M_Conditions",
+      "type": "rect",
+      "style": [
+        "rect"
+      ],
+      "from": {
+        "data": "conditions"
+      },
+      "encode": {
+        "update": {
+          "fill": {
+            "scale": "legend_cd",
+            "field": "description"
+          },
+          "fillOpacity": {
+            "value": 0.25
+          },
+          "x": {
+            "value": 0
+          },
+          "x2": {
+            "signal": "width"
+          },
+          "y": {
+            "scale": "yscale",
+            "field": "lowerboundary"
+          },
+          "y2": {
+            "scale": "yscale",
+            "field": "upperboundary"
+          }
+        }
+      }
+    },
+    {
+      "name": "M_RiskValues",
+      "type": "rect",
+      "from": {
+        "data": "riskvalues"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "scale": "xscale",
+            "field": "datedesc"
+          },
+          "width": {
+            "scale": "xscale",
+            "band": true
+          },
+          "y": {
+            "scale": "yscale",
+            "field": "value"
+          },
+          "y2": {
+            "scale": "yscale",
+            "value": 0.0001
+          },
+          "fill": {
+            "scale": "moment",
+            "field": "momentid"
+          },
+          "fillOpacity": {
+            "value": 0.80
+          },
+          "tooltip": {
+            "signal": "'Waterstand: ' + datum.datedesc"
+          }
+        },
+        "hover": {
+          "fillOpacity": {
+            "value": 1
+          }
+        }
+      }
+    }
+  ],
+  "legends": [
+    {
+      "fill": "legend_cd",
+      "title": "Condities",
+      "orient": {"signal": "legend_orient"},
+      "encode": {
+        "symbols": {
+          "update": {
+            "opacity": {
+              "value": 0.25
+            }
+          }
+        },
+        "title": {
+          "update": {
+            "font": {
+              "value": "Arial"
+            },
+            "fontSize": {
+              "value": 15
+            },
+            "fontWeight": {
+              "value": "normal"
+            },
+            "fill": {
+              "value": "#666666"
+            }
+          }
+        },
+        "labels": {
+          "update": {
+            "fontSize": {
+              "value": 14
+            },
+            "limit": {
+              "value": 600
+            }
+          }
+        }
+      }
+    },
+    {
+      "fill": "moment",
+      "title": "Moment",
+      "orient": {"signal": "legend_orient"},
+      "encode": {
+        "symbols": {
+          "update": {
+            "opacity": {
+              "value": 0.25
+            }
+          }
+        },
+        "title": {
+          "update": {
+            "font": {
+              "value": "Arial"
+            },
+            "fontSize": {
+              "value": 15
+            },
+            "fontWeight": {
+              "value": "normal"
+            },
+            "fill": {
+              "value": "#666666"
+            }
+          }
+        },
+        "labels": {
+          "update": {
+            "fontSize": {
+              "value": 14
+            }
+          }
+        }
+      }
+    }
+  ]
+}

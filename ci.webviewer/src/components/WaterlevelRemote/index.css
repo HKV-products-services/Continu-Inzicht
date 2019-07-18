@@ -1,0 +1,9 @@
+.remoteIcon path:first-of-type {
+  stroke: #000;
+  stroke-opacity: 0.7;
+}
+@media only screen and (min-width: 960px) {
+  .remote-padding-top {
+    padding-top: 0;
+  }
+}

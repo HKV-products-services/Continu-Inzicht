@@ -1,0 +1,115 @@
+// General
+export const SET_ERROR = 'SET_ERROR'
+export const SET_INITIAL_MOMENT_DATE = 'SET_INITIAL_MOMENT_DATE'
+export const SET_WARNING = 'SET_WARNING'
+
+// Overlays/features
+export const SET_FEATURE_ID = 'SET_FEATURE_ID'
+export const SET_FEATURE_NAME = 'SET_FEATURE_NAME'
+export const SET_SELECTED_FEATURE = 'SET_SELECTED_FEATURE'
+
+// MapConfig actions
+export const SET_BASELAYERS = 'SET_BASELAYERS'
+export const SET_GEOJSON = 'SET_GEOJSON'
+export const SET_MAP_DEFAULT = 'SET_MAP_DEFAULT'
+export const SET_MAP_OBJECT = 'SET_MAP_OBJECT'
+export const SET_WMS = 'SET_WMS'
+export const SET_MAPKEY = 'SET_MAPKEY'
+
+// GeoJson actions
+export const ADD_GEOJSON_LAYER = 'ADD_GEOJSON_LAYER'
+export const REMOVE_GEOJSON_LAYER = 'REMOVE_GEOJSON_LAYER'
+
+// WMS actions
+export const ADD_WMS_LAYER = 'ADD_WMS_LAYER'
+export const ADD_WMS_LAYERS = 'ADD_WMS_LAYERS'
+export const REMOVE_WMS_LAYER = 'REMOVE_WMS_LAYER'
+export const REMOVE_WMS_LAYERS = 'REMOVE_WMS_LAYERS'
+
+// VEGA actions
+export const SET_VEGA_SPECIFICATION = 'SET_VEGA_SPECIFICATION'
+
+// Layer actions
+export const HIDE_LAYER = 'HIDE_LAYER'
+export const SHOW_LAYER = 'SHOW_LAYER'
+
+// Group layers
+export const ADD_GROUP_LAYER = 'ADD_GROUP_LAYER'
+export const HIDE_GROUP_LAYER = 'HIDE_GROUP_LAYER'
+export const REMOVE_GROUP_LAYER = 'REMOVE_GROUP_LAYER'
+export const SHOW_GROUP_LAYER = 'SHOW_GROUP_LAYER'
+
+// Drawer actions
+export const DRAWER_BOTTOM_STATE = 'DRAWER_BOTTOM_STATE'
+export const DRAWER_LEFT_STATE = 'DRAWER_LEFT_STATE'
+export const DRAWER_RIGHT_STATE = 'DRAWER_RIGHT_STATE'
+export const DRAWER_SCENARIO_STATE = 'DRAWER_SCENARIO_STATE'
+
+// Loading actions
+export const DIALOG_LOADING_STATE = 'DIALOG_LOADING_STATE'
+export const LOADING_STATE = 'LOADING_STATE'
+
+// Dialog actions
+export const HKV_DIALOG_STATE = 'HKV_DIALOG_STATE'
+export const HKV_DIALOG_TYPE = 'HKV_DIALOG_TYPE'
+export const MEASURES_VAL_DIALOG_STATE = 'MEASURES_VAL_DIALOG_STATE'
+export const SCENARIO_DIALOG_STATE = 'SCENARIO_DIALOG_STATE'
+export const SECTION_DIALOG_STATE = 'SECTION_DIALOG_STATE'
+export const SET_CONDITIONS = 'SET_CONDITIONS'
+export const START_DIALOG_STATE = 'START_DIALOG_STATE'
+
+// Database actions
+export const SET_ANALYSE_PARAMETERS = 'SET_ANALYSE_PARAMETERS'
+export const SET_APP_INFO = 'SET_APP_INFO'
+export const SET_AREA = 'SET_AREA'
+export const SET_EXPERTJUDGEMENT = 'SET_EXPERTJUDGEMENT'
+export const SET_MEASURE = 'SET_MEASURE'
+export const SET_LOGS = 'SET_LOGS'
+export const SET_SCENARIO_OPTIONS = 'SET_SCENARIO_OPTIONS'
+export const SET_SECTION = 'SET_SECTION'
+export const SET_STATION = 'SET_STATION'
+export const SET_WATERLEVELS = 'SET_WATERLEVELS'
+
+export const SET_KBA_SETTINGS = 'SET_KBA_SETTINGS'
+
+// Measure actions
+export const SET_MEASURE_ID = 'SET_MEASURE_ID'
+export const SET_MEASURE_ALERT = 'SET_MEASURE_ALERT'
+export const SET_MEASURE_ANALYSE = 'SET_MEASURE_ANALYSE'
+export const SET_MEASURE_NAME = 'SET_MEASURE_NAME'
+export const SET_MEASURE_PARAMETER = 'SET_MEASURE_PARAMETER'
+export const SET_MOMENT_DATE = 'SET_MOMENT_DATE'
+export const SET_MOMENT_INDEX = 'SET_MOMENT_INDEX'
+
+// Area actions
+export const SET_AREA_RISK = 'SET_AREA_RISK'
+
+// Scenario actions
+export const SET_SCENARIO_FROM = 'SET_SCENARIO_FROM'
+export const SET_SCENARIO_TO = 'SET_SCENARIO_TO'
+export const SET_SIMULATION = 'SET_SIMULATION'
+
+// Waterlevel actions
+export const WATERLEVEL_BUTTON_STATE = 'WATERLEVEL_BUTTON_STATE'
+export const WATERLEVEL_REMOTES_STATE = 'WATERLEVEL_REMOTES_STATE'
+
+// Uncertainty actions
+export const SET_UNCERTAINTY_ALERT = 'SET_UNCERTAINTY_ALERT'
+export const SET_UNCERTAINTY_ID = 'SET_UNCERTAINTY_ID'
+export const SET_ENSEMBLE_CODE = 'SET_ENSEMBLE_CODE'
+export const SET_UNCERTAINTY_NAME = 'SET_UNCERTAINTY_NAME'
+
+// Views actions
+export const SET_ACTIVE_VIEW = 'SET_ACTIVE_VIEW'
+
+// Menu actions
+export const SET_APPLICATION_CONFIG = 'SET_APPLICATION_CONFIG'
+export const SET_MENU_INDEX = 'SET_MENU_INDEX'
+export const SET_MENU_LABEL = 'SET_MENU_LABEL'
+
+// Report actions
+export const SET_REPORT_FROM = 'SET_REPORT_FROM'
+export const SET_REPORT_TO = 'SET_REPORT_TO'
+export const SET_REPORT_LOGTYPE = 'SET_REPORT_LOGTYPE'
+
+export const SKIP_BUTTON_STATE = 'SKIP_BUTTON_STATE'

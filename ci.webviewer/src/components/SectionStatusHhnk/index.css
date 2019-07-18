@@ -1,0 +1,12 @@
+.swipeableview-slide .kadevak-status-icon {
+  font-size: 9.5rem;
+  width: 100%;
+}
+.swipeableview-slide .kadevak-status-icon {
+  font-size: 7.5rem;
+}
+@media only screen and (min-width: 600px) {
+  .swipeableview-slide .kadevak-status-icon {
+    font-size: 9.5rem;
+  }
+}

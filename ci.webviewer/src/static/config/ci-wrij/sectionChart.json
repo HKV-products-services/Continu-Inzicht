@@ -1,0 +1,623 @@
+{
+  "width": 500,
+  "height": 350,
+  "autosize": {"type": "fit", "resize": true},
+  "padding": {
+    "top": 0,
+    "right": 10,
+    "left": 10,
+    "bottom": 0
+  },
+  "signals": [
+    {
+      "name": "legend_orient",
+      "value": "right"
+    },
+    {
+      "name": "clear",
+      "value": true,
+      "on": [
+        {"events": "mouseup[!event.item]", "update": "true", "force": true}
+      ]
+    },
+    {
+      "name": "shift",
+      "value": false,
+      "on": [
+        {
+          "events": "@legendSymbol:click, @legendLabel:click",
+          "update": "event.shiftKey",
+          "force": true
+        }
+      ]
+    },
+    {
+      "name": "clicked",
+      "value": null,
+      "on": [
+        {
+          "events": "@legendSymbol:click, @legendLabel:click",
+          "update": "{value: datum.value}",
+          "force": true
+        }
+      ]
+    },
+    {
+      "name": "brush",
+      "value": 0,
+      "on": [
+        {"events": {"signal": "clear"}, "update": "clear ? [0, 0] : brush"},
+        {"events": "@xaxis:mousedown", "update": "[x(), x()]"},
+        {
+          "events": "[@xaxis:mousedown, window:mouseup] > window:mousemove!",
+          "update": "[brush[0], clamp(x(), 0, width)]"
+        },
+        {
+          "events": {"signal": "delta"},
+          "update": "clampRange([anchor[0] + delta, anchor[1] + delta], 0, width)"
+        }
+      ]
+    },
+    {
+      "name": "anchor",
+      "value": null,
+      "on": [{"events": "@brush:mousedown", "update": "slice(brush)"}]
+    },
+    {
+      "name": "xdown",
+      "value": 0,
+      "on": [{"events": "@brush:mousedown", "update": "x()"}]
+    },
+    {
+      "name": "delta",
+      "value": 0,
+      "on": [
+        {
+          "events": "[@brush:mousedown, window:mouseup] > window:mousemove!",
+          "update": "x() - xdown"
+        }
+      ]
+    },
+    {
+      "name": "domain",
+      "on": [
+        {
+          "events": {"signal": "brush"},
+          "update": "span(brush) ? invert('x', brush) : null"
+        }
+      ]
+    }
+  ],
+  "data": [
+    {
+      "name": "source",
+      "values": {
+        "state": {
+          "failureprobability": 0,
+          "color": "#00cc00",
+          "name": "veilig",
+          "description": "veilig",
+          "upperboundary": 0
+        },
+        "waterlevel": [
+          {
+            "moment": "nu"
+          }
+        ],
+        "fragilitycurve": [],
+        "conditions": [
+          {
+            "upperboundary": 0.001,
+            "lowerboundary": 0.0001,
+            "description": "veilig",
+            "color": "#00cc00"
+          },
+          {
+            "upperboundary": 0.01,
+            "lowerboundary": 0.001,
+            "description": "let op",
+            "color": "#e2e100"
+          },
+          {
+            "upperboundary": 0.1,
+            "lowerboundary": 0.01,
+            "description": "gevaar",
+            "color": "#ff6600"
+          },
+          {
+            "upperboundary": 1,
+            "lowerboundary": 0.1,
+            "description": "kritiek",
+            "color": "#ff0000"
+          }
+        ],
+        "failuremechanisms": [
+          {
+            "id": 1,
+            "name": "COMB",
+            "description": "Combinatie faalmechanismen"
+          }
+        ]
+      },
+      "format": {"type": "json"}
+    },
+    {
+      "name": "state_active",
+      "source": "source",
+      "transform": [
+        {
+          "type": "project",
+          "fields": [
+            "state.failureprobability",
+            "state.color",
+            "state.description"
+          ],
+          "as": ["failureprobability", "color", "description"]
+        },
+        {"type": "formula", "as": "scaled_fb", "expr": "if(datum.failureprobability <= 0.0001, 0.0001, datum.failureprobability)"}
+      ]
+    },
+    {
+      "name": "conditions",
+      "source": "source",
+      "transform": [
+        {"type": "flatten", "fields": ["conditions"], "as": ["conditions"]},
+        {
+          "type": "project",
+          "fields": [
+            "conditions.upperboundary",
+            "conditions.lowerboundary",
+            "conditions.color",
+            "conditions.description"
+          ],
+          "as": ["upperboundary", "lowerboundary", "color", "description"]
+        }
+      ]
+    },
+    {
+      "name": "fragilitycurve",
+      "source": "source",
+      "transform": [
+        {
+          "type": "flatten",
+          "fields": ["fragilitycurve"],
+          "as": ["fragilitycurve"]
+        },
+        {
+          "type": "project",
+          "fields": [
+            "fragilitycurve.failuremechanismid",
+            "fragilitycurve.hydraulicload",
+            "fragilitycurve.failureprobability"
+          ],
+          "as": ["failuremechanismid", "hydraulicload", "failureprobability"]
+        },
+        {"type": "filter", "expr": "datum.failureprobability >= 0.0001"}
+      ]
+    },
+    {
+      "name": "failuremechanisms",
+      "source": "source",
+      "transform": [
+        {
+          "type": "flatten",
+          "fields": ["failuremechanisms"],
+          "as": ["failuremechanisms"]
+        },
+        {
+          "type": "project",
+          "fields": ["failuremechanisms.id", "failuremechanisms.description"],
+          "as": ["id", "description"]
+        }
+      ]
+    },
+    {
+      "name": "waterlevel",
+      "source": "source",
+      "transform": [
+        {"type": "flatten", "fields": ["waterlevel"], "as": ["waterlevel"]},
+        {
+          "type": "project",
+          "fields": [
+            "waterlevel.moment",
+            "waterlevel.momentid",
+            "waterlevel.value"
+          ],
+          "as": ["moment", "momentid", "value"]
+        }
+      ]
+    },
+    {
+      "name": "selected",
+      "on": [
+        {"trigger": "clear", "remove": true},
+        {"trigger": "!shift", "remove": true},
+        {"trigger": "!shift && clicked", "insert": "clicked"},
+        {"trigger": "shift && clicked", "toggle": "clicked"}
+      ],
+      "transform": [
+        {
+          "type": "lookup",
+          "from": "failuremechanisms",
+          "key": "description",
+          "fields": ["value"],
+          "values": ["id"],
+          "as": ["id"]
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "xscale",
+      "type": "linear",
+      "range": "width",
+      "zero": true,
+      "domain": {
+        "fields":[
+          {"data": "fragilitycurve", "field": "hydraulicload"},
+          {"data": "waterlevel", "field": "value"}
+        ]
+      }
+    },
+    {
+      "name": "yscale",
+      "type": "log",      
+      "domain": {"data": "conditions", "fields": ["lowerboundary", "upperboundary"]},
+      "range": "height"
+    },
+    {
+      "name": "color_st",
+      "type": "ordinal",
+      "domain": {"data": "state_active", "field": "description"},
+      "range": {"data": "state_active", "field": "color"}
+    },
+    {
+      "name": "color_wl",
+      "type": "ordinal",
+      "domain": {"data": "waterlevel", "field": "momentid"},
+      "range": {"scheme": "category20"}
+    },
+    {
+      "name": "legend_cd",
+      "type": "ordinal",
+      "domain": {"data": "conditions", "field": "description"},
+      "range": {"data": "conditions", "field": "color"}
+    },
+    {
+      "name": "label_wl",
+      "type": "ordinal",
+      "domain": {"data": "waterlevel", "field": "moment"},
+      "range": {"scheme": "category20"}
+    },
+    {
+      "name": "color_fc",
+      "type": "ordinal",
+      "domain": {"data": "failuremechanisms", "field": "id"},
+      "range": ["black", "#f47835", "#d41243", "#8ec127", "#0082FC"]
+    },
+    {
+      "name": "label_fm",
+      "type": "ordinal",
+      "domain": {"data": "failuremechanisms", "field": "id"},
+      "range": {"data": "failuremechanisms", "field": "description"}
+    },
+    {
+      "name": "selected_fm",
+      "type": "ordinal",
+      "domain": {"data": "failuremechanisms", "field": "description"},
+      "range": {"data": "failuremechanisms", "field": "id"}
+    },
+    {
+      "name": "legend_fm",
+      "type": "ordinal",
+      "domain": {"data": "failuremechanisms", "field": "description"},
+      "range": ["black", "#f47835", "#d41243", "#8ec127", "#0082FC"]
+    }
+  ],
+  "axes": [
+    {
+      "orient": "left",
+      "scale": "yscale",
+      "title": "Faal-klasse",
+      "labels": false,
+      "ticks": false,
+      "values": [
+        0.0001,
+        0.001,
+        0.01,
+        0.1,
+        1
+      ],      
+      "titlePadding": 10,
+      "grid": true,
+      "tickCount": {
+        "signal": "ceil(height/20)"
+      },
+      "encode": {
+        "ticks": {
+          "update": {"stroke": {"value": "#000"}, "strokeWidth": {"value": 0.5}}
+        },
+        "title": {
+          "update": {
+            "font": {"value": "Verdana"},
+            "fontSize": {"value": 14},
+            "fontWeight": {"value": "normal"},
+            "fill": {"value": "#000"}
+          }
+        },
+        "labels": {
+          "update": {
+            "font": {"value": "Verdana"},
+            "fontSize": {"value": 14},
+            "fontWeight": {"value": "normal"},
+            "fill": {"value": "#000"}
+          }
+        }
+      }
+    },
+    {
+      "orient": "bottom",
+      "scale": "xscale",
+      "grid": true,
+      "format": ".2f",
+      "title": "Waterstand [m+NAP]",
+      "tickCount": {
+        "signal": "ceil(width/80)"
+      },
+      "encode": {
+        "ticks": {
+          "update": {"stroke": {"value": "#000"}, "strokeWidth": {"value": 0.5}}
+        },
+        "title": {
+          "update": {
+            "font": {"value": "Verdana"},
+            "fontSize": {"value": 14},
+            "fontWeight": {"value": "normal"},
+            "fill": {"value": "#000"}
+          }
+        },
+        "labels": {
+          "update": {
+            "font": {"value": "Verdana"},
+            "fontSize": {"value": 14},
+            "fontWeight": {"value": "normal"},
+            "fill": {"value": "#000"}
+          }
+        }
+      }
+    }
+  ],
+  "marks": [
+    {
+      "name": "M_Conditions",
+      "type": "rect",
+      "style": ["rect"],
+      "from": {"data": "conditions"},
+      "encode": {
+        "update": {
+          "fill": {"scale": "legend_cd", "field": "description"},
+          "fillOpacity": {"value": 0.25},
+          "x": {"value": 0},
+          "x2": {"signal": "width"},
+          "y": {"scale": "yscale", "field": "lowerboundary"},
+          "y2": {"scale": "yscale", "field": "upperboundary"}
+        }
+      }
+    },  
+    {
+      "name": "M_WaterLevel",
+      "from": {"data": "waterlevel"},
+      "type": "rule",
+      "encode": {
+        "update": {
+          "x": {"scale": "xscale", "field": "value"},
+          "x2": {"scale": "xscale", "field": "value"},
+          "y": {"value": 0},
+          "y2": {"signal": "height"},
+          "stroke": {"scale": "color_wl", "field": "momentid"},
+          "strokeWidth": {"value": 3},
+          "tooltip": {"signal": "'Waterstand: ' + datum.moment"}
+        },
+        "hover": {"strokeWidth": {"value": 6}}
+      }
+    },
+    {
+      "name": "M_State",
+      "from": {"data": "state_active"},
+      "type": "rule",
+      "encode": {
+        "update": {
+          "y": {"scale": "yscale", "field": "scaled_fb"},
+          "y2": {"scale": "yscale", "field": "scaled_fb"},
+          "x": {"value": 0},
+          "x2": {"signal": "width"},
+          "stroke": {"scale": "color_st", "field": "description"},
+          "strokeWidth": {"value": 4},
+          "tooltip": {"signal": "'Huidige conditie: ' + datum.description"}
+        },
+        "hover": {"strokeWidth": {"value": 6}}
+      }
+    },      
+    {
+      "type": "group",
+      "from": {
+        "facet": {
+          "name": "series_fc",
+          "data": "fragilitycurve",
+          "groupby": "failuremechanismid"
+        }
+      },
+      "marks":[
+    {
+      "name": "M_FragilityCurve_BG",      
+      "type": "line",
+      "from": {"data": "series_fc"},
+      "encode": {
+        "update": {
+          "x": {"scale": "xscale", "field": "hydraulicload"},
+          "y": {"scale": "yscale", "field": "failureprobability"},
+          "opacity": [
+            {
+              "test": "(!domain || inrange(datum.hydraulicload, domain)) && (!length(data('selected')) || indata('selected', 'id', datum.failuremechanismid) )",
+              "value": 1
+            },
+            {"value": 0}
+          ],
+          "stroke": [
+            {
+              "test": "(!domain || inrange(datum.hydraulicload, domain)) && (!length(data('selected')) || indata('selected', 'id', datum.failuremechanismid))",
+              "value": "white"
+            },
+            {"value": "transparent"}
+          ],
+          "strokeWidth": {"value": 5},
+          "fillOpacity": {"value": 1},
+          "tooltip": {
+            "signal": "'Faalmechanisme: ' + scale('label_fm', datum.failuremechanismid)"
+          }
+        }
+      }
+    },        
+    {
+      "name": "M_FragilityCurve",      
+      "type": "line",
+      "from": {"data": "series_fc"},
+      "encode": {
+        "update": {
+          "x": {"scale": "xscale", "field": "hydraulicload"},
+          "y": {"scale": "yscale", "field": "failureprobability"},
+          "opacity": [
+            {
+              "test": "(!domain || inrange(datum.hydraulicload, domain)) && (!length(data('selected')) || indata('selected', 'id', datum.failuremechanismid) )",
+              "value": 1
+            },
+            {"value": 0}
+          ],
+          "stroke": [
+            {
+              "test": "(!domain || inrange(datum.hydraulicload, domain)) && (!length(data('selected')) || indata('selected', 'id', datum.failuremechanismid))",
+              "scale": "color_fc",
+              "field": "failuremechanismid"
+            },
+            {"value": "transparent"}
+          ],
+          "strokeWidth": {"value": 4},
+          "strokeDash": {"value": [4,2]},
+          "fillOpacity": {"value": 1},
+          "tooltip": {
+            "signal": "'Faalmechanisme: ' + scale('label_fm', datum.failuremechanismid)"
+          }
+        },
+        "hover": {"strokeWidth": {"value": 4}}
+      }
+    }           
+      ]
+    }
+  ],
+  "legends": [
+    {
+      "fill": "color_st",
+      "title": "Huidige conditie",
+      "orient": {"signal": "legend_orient"},
+      "encode": {
+        "title": {
+          "update": {
+            "font": {"value": "Arial"},
+            "fontSize": {"value": 15},
+            "fontWeight": {"value": "normal"},
+            "fill": {"value": "#666666"}
+          }
+        },
+        "labels": {"update": {"fontSize": {"value": 14}}}
+      }
+    },
+    {
+      "fill": "legend_cd",
+      "title": "Condities",
+      "orient": {"signal": "legend_orient"},
+      "encode": {
+        "symbols": {"update": {"opacity": {"value": 0.25}}},
+        "title": {
+          "update": {
+            "font": {"value": "Arial"},
+            "fontSize": {"value": 15},
+            "fontWeight": {"value": "normal"},
+            "fill": {"value": "#666666"}
+          }
+        },
+        "labels": {"update": {"fontSize": {"value": 14}}}
+      }
+    },
+    {
+      "stroke": "label_wl",
+      "title": "Waterstand",
+      "orient": {"signal": "legend_orient"},
+      "encode": {
+        "symbols": {
+          "update": {
+            "strokeWidth": {"value": 2},
+            "shape": {"value": "M-1,-0.2L1,-0.2 1,0.2 -1,0.2Z"},
+            "opacity": {"value": 1}
+          }
+        },
+        "title": {
+          "update": {
+            "font": {"value": "Arial"},
+            "fontSize": {"value": 15},
+            "fontWeight": {"value": "normal"},
+            "fill": {"value": "#666666"}
+          }
+        },
+        "labels": {"update": {"fontSize": {"value": 14}}}
+      }
+    },
+    {
+      "stroke": "legend_fm",
+      "fill":"legend_fm",
+      "title": "Faalmechanisme",
+      "orient": {"signal": "legend_orient"},
+      "encode": {
+        "symbols": {
+          "name": "legendSymbol",
+          "interactive": true,
+          "update": {
+            "strokeWidth": {"value": 2},
+            "shape": {"value": "M-1,-1H1V1H-1Z"},
+            "opacity": [
+              {
+                "test": "!length(data('selected')) || indata('selected', 'value', datum.value)",
+                "value": 0.7
+              },
+              {"value": 0.15}
+            ],
+            "size": {"value": 64}
+          }
+        },
+        "labels": {
+          "name": "legendLabel",
+          "interactive": true,
+          "update": {
+            "opacity": [
+              {
+                "test": "!length(data('selected')) || indata('selected', 'value', datum.value)",
+                "value": 1
+              },
+              {"value": 0.25}
+            ],
+            "fontSize": {"value": 14},
+            "limit": {"value": 600}
+          }
+        },
+        "title": {
+          "update": {
+            "font": {"value": "Arial"},
+            "fontSize": {"value": 15},
+            "fontWeight": {"value": "normal"},
+            "fill": {"value": "#666666"}
+          }
+        }
+      }
+    }
+  ]
+}

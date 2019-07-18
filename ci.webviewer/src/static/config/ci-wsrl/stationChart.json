@@ -1,0 +1,443 @@
+{
+  "width": 500,
+  "height": 350,
+  "autosize": {"type": "fit", "resize": true},
+  "padding": {
+    "top": 0,
+    "right": 10,
+    "left": 10,
+    "bottom": 0
+  },
+  "axes": [
+    {
+      "orient": "left",
+      "scale": "yscale",
+      "title": "Waterstand [m+NAP]",
+      "titlePadding": 10,
+      "grid": true,
+      "encode": {
+        "ticks": {
+          "update": {"stroke": {"value": "#000"}, "strokeWidth": {"value": 0.5}}
+        },
+        "title": {
+          "update": {
+            "font": {"value": "Verdana"},
+            "fontSize": {"value": 14},
+            "fontWeight": {"value": "normal"},
+            "fill": {"value": "#000"}
+          }
+        },
+        "labels": {
+          "update": {
+            "font": {"value": "Verdana"},
+            "fontSize": {"value": 14},
+            "fontWeight": {"value": "normal"},
+            "fill": {"value": "#000"}
+          }
+        }
+      }
+    },
+    {
+      "orient": "bottom",
+      "scale": "xscale",
+      "grid": true,
+      "format": "%Y-%m-%d %H:%M",
+      "labelOverlap": true,
+      "tickCount": 6,
+      "encode": {
+        "ticks": {
+          "update": {"stroke": {"value": "#000"}, "strokeWidth": {"value": 0.5}}
+        },
+        "title": {
+          "update": {
+            "font": {"value": "Verdana"},
+            "fontSize": {"value": 14},
+            "fontWeight": {"value": "normal"},
+            "fill": {"value": "#000"}
+          }
+        },
+        "labels": {
+          "update": {
+            "font": {"value": "Verdana"},
+            "fontSize": {"value": 14},
+            "fontWeight": {"value": "normal"},
+            "fill": {"value": "#000"},
+            "text": {"signal": "timeFormat(datum.value, '%Y-%m-%d %H:%M')"},
+            "align": {"value": "right"},
+            "angle": {"value": 340}
+          }
+        }
+      }
+    }
+  ],
+  "signals": [
+    {"name": "legend_orient", "value": "right"},
+    {
+      "name": "hover",
+      "value": null,
+      "on": [
+        {"events": "@points_voronoi:mouseover", "update": "datum"},
+        {"events": "@points_voronoi:mouseout", "update": "null"}
+      ]
+    },
+    {
+      "name": "signal_highligtedpoint",
+      "value": "test",
+      "update": "data('highlightedPoint')[0]"
+    }
+  ],
+  "data": [
+    {
+      "name": "source",
+      "values": {
+        "waterlevel": [
+          {
+            "parametername": "Voorspelde waterstand",
+            "datetime": 0,
+            "value": 0
+          }
+        ],
+        "states": [
+          {
+            "color": "#daeef3",
+            "description": "normaal",
+            "upperboundary": 0,
+            "datetime": 0,
+            "moment": "nu"
+          }
+        ],
+        "conditions": [
+          {
+            "upperboundary": 0,
+            "lowerboundary": 0,
+            "description": "normaal",
+            "color": "#daeef3"
+          }
+        ]
+      },
+      "format": {"type": "json"}
+    },
+    {
+      "name": "conditions",
+      "source": "source",
+      "transform": [
+        {
+          "type": "flatten",
+          "fields": [
+            "conditions"
+          ],
+          "as": [
+            "conditions"
+          ]
+        },
+        {
+          "type": "project",
+          "fields": [
+            "conditions.upperboundary",
+            "conditions.lowerboundary",
+            "conditions.color",
+            "conditions.description"
+          ],
+          "as": [
+            "upperboundary",
+            "lowerboundary",
+            "color",
+            "description"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "waterlevel",
+      "source": "source",
+      "transform": [
+        {
+          "type": "flatten",
+          "fields": [
+            "waterlevel"
+          ],
+          "as": [
+            "waterlevel"
+          ]
+        },
+        {
+          "type": "project",
+          "fields": [
+            "waterlevel.datetime",
+            "waterlevel.parametername",
+            "waterlevel.value"
+          ],
+          "as": [
+            "datetime",
+            "parametername",
+            "value"
+          ]
+        },
+        {
+          "type": "collect",
+          "sort": {
+            "field": "datetime"
+          }
+        }
+      ]
+    },
+    {
+      "name": "states",
+      "source": "source",
+      "transform": [
+        {
+          "type": "flatten",
+          "fields": [
+            "states"
+          ],
+          "as": [
+            "states"
+          ]
+        },
+        {
+          "type": "project",
+          "fields": [
+            "states.datetime",
+            "states.moment",
+            "states.parametername",
+            "states.color"
+          ],
+          "as": [
+            "datetime",
+            "moment",
+            "parametername",
+            "color"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "highlightedPoint",
+      "source": "waterlevel",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "hover && hover.datum.datetime === datum.datetime && hover.datum.value === datum.value"
+        }
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "name": "Cond",
+      "type": "rect",
+      "style": ["rect"],
+      "from": {"data": "conditions"},
+      "encode": {
+        "update": {
+          "fill": {"scale": "legend_cd", "field": "description"},
+          "fillOpacity": {"value": 0.5},
+          "x": {"value": 0},
+          "x2": {"signal": "width"},
+          "y": {"scale": "yscale", "field": "lowerboundary"},
+          "y2": {"scale": "yscale", "field": "upperboundary"}
+        }
+      }
+    },
+    {
+      "from": {
+        "facet": {
+          "data": "waterlevel",
+          "groupby": "parametername",
+          "name": "wl_series"
+        }
+      },
+      "marks": [
+        {
+          "encode": {
+            "update": {
+              "stroke": {"field": "parametername", "scale": "color_wl"},
+              "strokeWidth": {"value": 2},
+              "x": {"field": "datetime", "scale": "xscale"},
+              "y": {"field": "value", "scale": "yscale"},
+              "fillOpacity": {"value": 1},
+              "interpolate": {"value": "step"}
+            }
+          },
+          "from": {"data": "wl_series"},
+          "type": "line"
+        },
+        {
+          "name": "points_on_line",
+          "from": {"data": "waterlevel"},
+          "type": "symbol",
+          "encode": {
+            "update": {
+              "fill": {"value": "transparent"},
+              "size": {"value": 10},
+              "stroke": {"value": "transparent"},
+              "strokeWidth": {"value": 0.5},
+              "x": {"field": "datetime", "scale": "xscale"},
+              "y": {"value": 0}
+            }
+          }
+        },
+        {
+          "name": "points_voronoi",
+          "type": "path",
+          "from": {"data": "points_on_line"},
+          "encode": {
+            "update": {
+              "fill": {"value": "transparent"},
+              "stroke": {"value": "transparent"},
+              "isVoronoi": {"value": true},
+              "tooltip": {
+                "signal": "'Belasting: ' +  format(datum.datum.value, '.2f') + ' m+NAP ('+ timeFormat(datum.datum.datetime, '%Y-%m-%d %H:%M'+')')"
+              }
+            }
+          },
+          "transform": [
+            {
+              "type": "voronoi",
+              "x": "datum.x",
+              "y": "datum.y",
+              "size": [{"signal": "width"}, {"signal": "height"}]
+            }
+          ]
+        },
+        {
+          "from": {"data": "highlightedPoint"},
+          "type": "rule",
+          "interactive": false,
+          "encode": {
+            "update": {
+              "x": {"scale": "xscale", "field": "datetime"},
+              "y": {"signal": "height"},
+              "y2": {"value": 0},
+              "stroke": {"value": "darkgrey"},
+              "strokeWidth": {"value": 0.5}
+            }
+          }
+        },   
+        {
+          "from": {"data": "highlightedPoint"},
+          "type": "symbol",
+          "interactive": false,
+          "encode": {
+            "update": {
+              "x": {"scale": "xscale", "field": "datetime"},
+              "y": {"scale": "yscale", "field": "value"},
+              "stroke": {"value": "transparent"},
+              "strokeWidth": {"value": 0},
+              "fill": {"value": "crimson"},
+              "size": {"value": 30},
+              "strokeOpacity": {"value": 0}
+            }
+          }
+        }
+      ],
+      "type": "group"
+    },
+    {
+      "name": "Momenten",
+      "from": {"data": "states"},
+      "type": "rule",
+      "encode": {
+        "update": {
+          "x": {"scale": "xscale", "field": "datetime"},
+          "x2": {"scale": "xscale", "field": "datetime"},
+          "y": {"value": 0},
+          "y2": {"signal": "height"},
+          "stroke": {"scale": "color_st", "field": "moment"},
+          "strokeWidth": {"value": 3},
+          "tooltip": {
+            "signal": "'Moment: ' + datum.moment +' (' +timeFormat(datum.datetime, '%Y-%m-%d %H:%M')+')'"
+          }
+        },
+        "hover": {"strokeWidth": {"value": 5}}
+      }
+    }
+  ],
+  "scales": [
+    {
+      "domain": {"data": "waterlevel", "field": "datetime"},
+      "name": "xscale",
+      "range": "width",
+      "type": "time"
+    },
+    {
+      "domain": {
+        "data": "conditions",
+        "fields": ["upperboundary", "lowerboundary"]
+      },
+      "name": "yscale",
+      "range": "height",
+      "type": "linear",
+      "zero":false
+    },
+    {
+      "name": "color_wl",
+      "type": "ordinal",
+      "domain": {"data": "waterlevel", "field": "parametername"},
+      "range": {"scheme": "category20"}
+    },
+    {
+      "name": "color_st",
+      "type": "ordinal",
+      "domain": {"data": "states", "field": "moment"},
+      "range": {"scheme": "set2"}
+    },
+    {
+      "name": "legend_cd",
+      "type": "ordinal",
+      "domain": {"data": "conditions", "field": "description"},
+      "range": {"data": "conditions", "field": "color"}
+    }
+  ],
+  "legends": [
+    {
+      "fill": "color_st",
+      "title": "Momenten",
+      "orient": {"signal": "legend_orient"},
+      "encode": {
+        "title": {
+          "update": {
+            "font": {"value": "Arial"},
+            "fontSize": {"value": 15},
+            "fontWeight": {"value": "normal"},
+            "fill": {"value": "#666666"}
+          }
+        },
+        "labels": {"update": {"fontSize": {"value": 14}}}
+      }
+    },
+    {
+      "fill": "legend_cd",
+      "title": "Condities",
+      "orient": {"signal": "legend_orient"},
+      "encode": {
+        "symbols": {"update": {"opacity": {"value": 0.5}}},
+        "title": {
+          "update": {
+            "font": {"value": "Arial"},
+            "fontSize": {"value": 15},
+            "fontWeight": {"value": "normal"},
+            "fill": {"value": "#666666"}
+          }
+        },
+        "labels": {"update": {"fontSize": {"value": 14}}}
+      }
+    },
+    {
+      "fill": "color_wl",
+      "title": "Belasting",
+      "orient": {"signal": "legend_orient"},
+      "encode": {
+        "title": {
+          "update": {
+            "font": {"value": "Arial"},
+            "fontSize": {"value": 15},
+            "fontWeight": {"value": "normal"},
+            "fill": {"value": "#666666"}
+          }
+        },
+        "labels": {"update": {"fontSize": {"value": 14}}}
+      }
+    }
+  ]
+}

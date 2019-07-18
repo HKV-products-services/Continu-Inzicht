@@ -1,0 +1,326 @@
+{
+  "application": [
+    {
+      "id": 8,
+      "name": "Continu Inzicht HHNK",
+      "customer": "Hoogheemraadschap Hollands Noorderkwartier",
+      "locale": "nl",
+      "menuType": "list",
+      "percentages": true,
+      "schema": "continuinzicht_hhnk",
+      "vega": [
+        {
+          "id": 1,
+          "name": "Section",
+          "key": "section",
+          "specName": "sectionChart",
+          "spec": "/static/config/ci-hhnk/sectionChart.json",
+          "paddingRL": 0,
+          "paddingTB": 10
+        }
+      ],
+      "openDrawers": ["left"],
+      "dialogs": [
+        {
+          "title": {
+            "name": "Disclaimer",
+            "type": "name"
+          },
+          "key": "Disclaimer",
+          "type": "default",
+          "size": "small",
+          "views": [
+            {
+              "type": "disclaimer",
+              "contentApp": "Deze app is een demonstratie van het NKWK project 'Continu Inzicht'. De ambitie van continu inzicht is om een methode en instrumenten te ontwikkelen om op willekeurig momenten de actuele en verwachte faalkans en risico's in beeld te hebben die ten grondslag ligt aan werkprocessen als calamiteitenmanagement, vergunningen, asset management, inspecties, beoordelen en ontwerpen. Hiervoor is één informatiebasis noodzakelijk die actueel is en continu verbeterd wordt door deze werkprocessen. Hiermee is de beheerder continu in control, en kan deze aantoonbaar verantwoorden dat de juiste keuzes worden gemaakt vanuit de opties van reductie van overstromingsrisico's en faalkansen.<h6>Toepasselijkheid</h6>Deze voorwaarden en disclaimer zijn van toepassing op onze producten, waaronder deze app. Door deze app te installeren en/of aangeboden informatie in de app te gebruiken, verklaart u zich akkoord met de toepasselijkheid van deze disclaimer.<h6>Zorgvuldigheid</h6>HKV neemt zorgvuldigheid in acht bij het samenstellen en onderhouden van deze app en de gegevens die worden weergegeven, maar kan de juistheid, volledigheid en actualiteit van de aangeboden informatie niet garanderen. HKV sluit iedere aansprakelijkheid uit voor directe en indirecte schade, welke aard dan ook, die verband houdt met het gebruik van deze app, waaronder schade die het gevolg is van het gebruik van informatie die door deze app is verkregen.<h6>Eigendomsvoorbehoud</h6>HKV behoudt alle intellectuele eigendomsrechten en andere rechten van deze app. het is alleen na voorafgaande schriftelijke toestemming van HKV toegestaan de informatie en/of de huisstijl te kopiëren, te vermenigvuldigen, te bewerken of door te leveren.<h6>Gebruikte gegevens</h6>De getoonde situatie geeft een benadering van de werkelijkheid. De sterkte van waterkeringen is bepaald op basis van basisinformatie van waterkeringen uit VNK2. Met de nieuwe rekenregels uit WBI zijn eenvoudige fragility curves opgesteld waarmee de totale faalkans, als ook de kansbijdrage van verschillende faalmechanisme zijn beschreven. In deze curves is een aantal beheermaatregelen verwerkt maar deze zijn nog niet uitgebreid gevalideerd. De risico's geven een indicatie van het schade- en slachtofferrisico. De criteria voor statuswijzigingen van keringen, waterstanden en gebieden zijn met het projectteam gekozen.<br/><br/>Zowel de app als de viewer maken gebruik van een centrale informatielaag. Deze informatielaag, onder single point of truth, wordt gebruikt voor alle toepassingen. De informatielaag kan ook worden verrijkt door te gebruiken in allerlei werkprocessen. De informatielaag wordt gevoed met data uit allerlei bronnen. Zo zijn het WBI, LIWO, neerslag en verdampingsradar belangrijke bronnen voor continu inzicht.<br/><br/>Voor meer informatie over de gebruikte gegevens, uitgangspunten en de kennisdoorwerking voor bijvoorbeeld beheer en onderhoud, inspecties, de zorgplicht en crisisbeheersing, wordt verwezen naar het hoofdrapport 'hoofdrapport continu inzicht (14 december).pdf. Dit rapport is op te vragen bij HKV.<h6>Privacy</h6>In deze app worden geen persoonlijke gegevens verwerkt. Voor het kunnen versturen van meldingen (push berichten) is het noodzakelijk dat uw telefoon of uw browser wordt geregistreerd bij Google Cloud Messaging. Deze registratie is niet gekoppeld aan persoonsgegevens en deze zijn ook niet te herleiden. Wij verzamelen geen gebruikersdata en slaan deze gegevens niet op voor andere doeleinden anders dan het versturen van meldingen (push berichten).<h6>Overige voorwaarden</h6>Voor zover deze niet afwijken van bovenstaande, zijn op deze app en het gebruik ervan verder van toepassing de Nederland ICT Voorwaarden 2014. Een kopie van deze voorwaarden kunt u opvragen bij HKV. Deze voorwaarden en disclaimer zijn van toepassing op onze producten, waaronder deze app. Door deze app te installeren en/of aangeboden informatie in de app te gebruiken, verklaart u zich akkoord met de toepasselijkheid van deze disclaimer.",
+              "contentWeb": "Deze viewer is een demonstratie van het NKWK project 'Continu Inzicht'. De ambitie van continu inzicht is om een methode en instrumenten te ontwikkelen om op willekeurig momenten de actuele en verwachte faalkans en risico's in beeld te hebben die ten grondslag ligt aan werkprocessen als calamiteitenmanagement, vergunningen, asset management, inspecties, beoordelen en ontwerpen. Hiervoor is één informatiebasis noodzakelijk die actueel is en continu verbeterd wordt door deze werkprocessen. Hiermee is de beheerder continu in control, en kan deze aantoonbaar verantwoorden dat de juiste keuzes worden gemaakt vanuit de opties van reductie van overstromingsrisico's en faalkansen.<h6>Toepasselijkheid</h6>Deze voorwaarden en disclaimer zijn van toepassing op onze producten, waaronder deze viewer. Door deze viewer te installeren en/of aangeboden informatie in de viewer te gebruiken, verklaart u zich akkoord met de toepasselijkheid van deze disclaimer.<h6>Zorgvuldigheid</h6>HKV neemt zorgvuldigheid in acht bij het samenstellen en onderhouden van deze viewer en de gegevens die worden weergegeven, maar kan de juistheid, volledigheid en actualiteit van de aangeboden informatie niet garanderen. HKV sluit iedere aansprakelijkheid uit voor directe en indirecte schade, welke aard dan ook, die verband houdt met het gebruik van deze viewer, waaronder schade die het gevolg is van het gebruik van informatie die door deze viewer is verkregen.<h6>Eigendomsvoorbehoud</h6>HKV behoudt alle intellectuele eigendomsrechten en andere rechten van deze viewer. het is alleen na voorafgaande schriftelijke toestemming van HKV toegestaan de informatie en/of de huisstijl te kopiëren, te vermenigvuldigen, te bewerken of door te leveren.<h6>Gebruikte gegevens</h6>De getoonde situatie geeft een benadering van de werkelijkheid. De sterkte van waterkeringen is bepaald op basis van basisinformatie van waterkeringen uit VNK2. Met de nieuwe rekenregels uit WBI zijn eenvoudige fragility curves opgesteld waarmee de totale faalkans, als ook de kansbijdrage van verschillende faalmechanisme zijn beschreven. In deze curves is een aantal beheermaatregelen verwerkt maar deze zijn nog niet uitgebreid gevalideerd. De risico's geven een indicatie van het schade- en slachtofferrisico. De criteria voor statuswijzigingen van keringen, waterstanden en gebieden zijn met het projectteam gekozen.<br/><br/>Zowel de app als de viewer maken gebruik van een centrale informatielaag. Deze informatielaag, onder single point of truth, wordt gebruikt voor alle toepassingen. De informatielaag kan ook worden verrijkt door te gebruiken in allerlei werkprocessen. De informatielaag wordt gevoed met data uit allerlei bronnen. Zo zijn het WBI, LIWO, neerslag en verdampingsradar belangrijke bronnen voor continu inzicht.<br/><br/>Voor meer informatie over de gebruikte gegevens, uitgangspunten en de kennisdoorwerking voor bijvoorbeeld beheer en onderhoud, inspecties, de zorgplicht en crisisbeheersing, wordt verwezen naar het hoofdrapport 'hoofdrapport continu inzicht (14 december).pdf. Dit rapport is op te vragen bij HKV.<h6>Privacy</h6>In deze viewer worden geen persoonlijke gegevens verwerkt. Voor het kunnen versturen van meldingen (push berichten) is het noodzakelijk dat uw telefoon of uw browser wordt geregistreerd bij Google Cloud Messaging. Deze registratie is niet gekoppeld aan persoonsgegevens en deze zijn ook niet te herleiden. Wij verzamelen geen gebruikersdata en slaan deze gegevens niet op voor andere doeleinden anders dan het versturen van meldingen (push berichten).<h6>Overige voorwaarden</h6>Voor zover deze niet afwijken van bovenstaande, zijn op deze viewer en het gebruik ervan verder van toepassing de Nederland ICT Voorwaarden 2014. Een kopie van deze voorwaarden kunt u opvragen bij HKV. Deze voorwaarden en disclaimer zijn van toepassing op onze producten, waaronder deze viewer. Door deze viewer te installeren en/of aangeboden informatie in de viewer te gebruiken, verklaart u zich akkoord met de toepasselijkheid van deze disclaimer.",
+              "switch": false
+            }
+          ],
+          "titleActions": [],
+          "dialogBottom": {
+            "actions": [
+              {
+                "name": "Ok",
+                "function": "closeDialog"
+              }
+            ]
+          }
+        }
+      ],
+      "startMenuActive": true,
+      "startMenuStyle": "icons",
+      "startMenu": [
+        {
+          "active": false,
+          "index": 0,
+          "key": "",
+          "label": "Real time inzicht",
+          "mainMenu": []
+        },
+        {
+          "active": false,
+          "index": 1,
+          "key": "",
+          "label": "What-if inzicht",
+          "mainMenu": []
+        },
+        {
+          "active": false,
+          "index": 2,
+          "key": "/rapportages",
+          "label": "Rapportages - zorgplicht",
+          "mainMenu": []
+        },
+        {
+          "active": true,
+          "index": 3,
+          "key": "",
+          "label": "Risicogestuurd beheer",
+          "mainMenu": [
+            {
+              "key": "/ci-hhnk",
+              "label": "Eisen beheer"
+            },
+            {
+              "key": "/ci-hhnk",
+              "label": "Type beheer"
+            },
+            {
+              "key": "http://hydra-as-a-service.hkvservices.nl/hhnkci",
+              "label": "Hydraulische belasting",
+              "target": "blank"
+            }
+          ]
+        },
+        {
+          "active": false,
+          "index": 4,
+          "key": "",
+          "label": "Beslissen onder onzekerheid",
+          "mainMenu": []
+        }
+      ],
+      "subMenu": [
+        {
+          "key": "",
+          "label": "Map",
+          "dialog": false,
+          "hideInWeb": false
+        },
+        {
+          "key": "",
+          "label": "Disclaimer",
+          "dialog": true,
+          "hideInWeb": false
+        }
+      ],
+      "map": {
+        "settings": {
+          "center": {
+            "lat": 52.730659,
+            "lon": 5.178249
+          },
+          "zoom": 13,
+          "minzoom": 8,
+          "maxzoom": 18,
+          "controls": {
+            "attribution": {
+              "show": true,
+              "position": "bottomright"
+            },
+            "zoom": {
+              "show": true,
+              "position": "bottomright",
+              "options": {}
+            },
+            "scale": {
+              "show": true,
+              "position": "bottomleft",
+              "options": {
+                "imperial": false,
+                "metric": true
+              }
+            }
+          }
+        },
+        "baselayers" : [
+          {
+            "name": "Luchtfoto",
+            "active": false,
+            "key": "luchtfoto",
+            "url": "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+            "options": {
+              "attribution": "&copy; <a href='http://www.esri.com/' target='_blank'>Esri</a>, | <a href='http://www.hkv.nl/' target='_blank'>HKV Services</a>"
+            }
+          },
+          {
+            "name": "Topografische kaart",
+            "key": "Topografische kaart",
+            "active": true,
+            "url": "https://services.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}",
+            "options": {
+              "attribution": "&copy; <a href='http://www.esri.com/' target='_blank'>Esri</a>, | <a href='http://www.hkv.nl/' target='_blank'>HKV Services</a>"
+            }
+          }
+        ],
+        "overlays": [
+          {
+            "type": "wms",
+            "paneType": "tile",
+            "view": "hhnkwms",
+            "selection": "check",
+            "name": "Inspecties",
+            "key": "Inspecties",
+            "url": "https://tsgeo.hkvservices.nl/geoserver/wms",
+            "layer": "Inspecties",
+            "workspace": "continuinzicht_hhnk",
+            "styles": [
+              "continuinzicht_hhnk_Inspecties"
+            ],
+            "active": false,
+            "opacity": 1,
+            "zoomto": false,
+            "zIndex": 999
+          },
+          {
+            "type": "wms",
+            "paneType": "tile",
+            "view": "hhnkwms",
+            "selection": "check",
+            "name": "Bekledingstypen",
+            "key": "Bekledingstypen",
+            "url": "https://tsgeo.hkvservices.nl/geoserver/wms",
+            "layer": "Bekledingstypen",
+            "workspace": "continuinzicht_hhnk",
+            "styles": [
+              "continuinzicht_hhnk_Bekledingstype"
+            ],            
+            "active": false,
+            "opacity": 1,
+            "zoomto": false,
+            "zIndex": 998
+          },
+          {
+            "type": "wms",
+            "paneType": "tile",
+            "view": "hhnkwms",
+            "selection": "check",
+            "name": "Pachtcontracten",
+            "key": "pachtcontracten",
+            "url": "https://tsgeo.hkvservices.nl/geoserver/wms",
+            "layer": "Pachtcontracten",
+            "workspace": "continuinzicht_hhnk",
+            "styles": [
+              "continuinzicht_hhnk_Pachtcontracten"
+            ],            
+            "active": false,
+            "opacity": 1,
+            "zoomto": false,
+            "zIndex": 997
+          },
+          {
+            "type": "wms",
+            "paneType": "tile",
+            "view": "hhnkwms",
+            "selection": "check",
+            "name": "Normtrajecten Signaleringswaarde",
+            "key": "Signaleringswaarde",
+            "url": "https://tsgeo.hkvservices.nl/geoserver/wms",
+            "layer": "Normtrajecten",
+            "workspace": "continuinzicht_hhnk",
+            "styles": [
+              "continuinzicht_hhnk_Normtrajecten_SW"
+            ],            
+            "active": false,
+            "opacity": 1,
+            "zoomto": false,
+            "zIndex": 996
+          },
+          {
+            "type": "wms",
+            "paneType": "tile",
+            "view": "hhnkwms",
+            "selection": "check",
+            "name": "Normtrajecten Ondergrenswaarde",
+            "key": "Ondergrenswaarde",
+            "url": "https://tsgeo.hkvservices.nl/geoserver/wms",
+            "layer": "Normtrajecten",
+            "workspace": "continuinzicht_hhnk",
+            "styles": [
+              "continuinzicht_hhnk_Normtrajecten_OG"
+            ],            
+            "active": false,
+            "opacity": 1,
+            "zoomto": false,
+            "zIndex": 995
+          },
+          {
+            "type": "geojson",
+            "paneType": "overlay",
+            "name": "Vakindeling",
+            "key": "vakindelingen",
+            "view": "hhnk",
+            "selection": "check",
+            "url": "https://tsws.hkvservices.nl/mangrove.github.ws/entry.asmx/Call?function=ci.appfunctions.GetFeatures&parameters={objecttype:%27section%27,appid:8}",
+            "active": true,
+            "zoomto": true,
+            "zIndex": 300,
+            "style": {
+              "color": "#bbb",
+              "weight": 6
+            },
+            "tooltip": {
+              "show": false,
+              "fields": [
+                {
+                  "title": "Naam",
+                  "field": "name"
+                },
+                {
+                  "title": "Lengte",
+                  "field": "length"
+                }
+              ]
+            }
+          },
+          {
+            "type": "geojson",
+            "paneType": "marker",
+            "name": "Beheer",
+            "key": "beheer",
+            "view": "hhnk",
+            "selection": "check",
+            "url": "https://tsws.hkvservices.nl/mangrove.github.ws/entry.asmx/Call?function=ci.appfunctions.GetFeatures&parameters={appid:8,objecttype:%27getfeaturestates%27}",
+            "active": false,
+            "zoomto": false,
+            "style": {
+              "type": "icon",
+              "property_style": [
+                {
+                  "property": "status",
+                  "style": "fillColor"
+                }
+              ],
+              "color": "#777",
+              "iconSize": {"x": 46, "y": 46}
+            },
+            "tooltip": {
+              "show": false,
+              "fields": [
+                {
+                  "title": "Naam",
+                  "field": "name"
+                },
+                {
+                  "title": "Lengte",
+                  "field": "length"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

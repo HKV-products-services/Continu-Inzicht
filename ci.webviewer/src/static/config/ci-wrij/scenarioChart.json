@@ -1,0 +1,226 @@
+{
+  "width": 800,
+  "height": 250,
+  "autosize": {"type": "fit", "resize": true},
+  "padding": {
+    "top": 0,
+    "right": 10,
+    "left": 10,
+    "bottom": 0
+  },
+  "axes": [
+    {
+      "orient": "left",
+      "scale": "yscale",
+      "title": "Waterstand [m+NAP]",
+      "titlePadding": 10,
+      "grid": true,
+      "encode": {
+        "ticks": {
+          "update": {"stroke": {"value": "#000"}, "strokeWidth": {"value": 0.5}}
+        },
+        "title": {
+          "update": {
+            "font": {"value": "Verdana"},
+            "fontSize": {"value": 14},
+            "fontWeight": {"value": "normal"},
+            "fill": {"value": "#000"}
+          }
+        },
+        "labels": {
+          "update": {
+            "font": {"value": "Verdana"},
+            "fontSize": {"value": 14},
+            "fontWeight": {"value": "normal"},
+            "fill": {"value": "#000"}
+          }
+        }
+      }
+    },
+    {
+      "orient": "bottom",
+      "scale": "xscale",
+      "grid": true,
+      "format": "%Y-%m-%d %H:%M",
+      "labelOverlap": true,
+      "tickCount": 6,
+      "encode": {
+        "ticks": {
+          "update": {"stroke": {"value": "#000"}, "strokeWidth": {"value": 0.5}}
+        },
+        "title": {
+          "update": {
+            "font": {"value": "Verdana"},
+            "fontSize": {"value": 14},
+            "fontWeight": {"value": "normal"},
+            "fill": {"value": "#000"}
+          }
+        },
+        "labels": {
+          "update": {
+            "font": {"value": "Verdana"},
+            "fontSize": {"value": 14},
+            "fontWeight": {"value": "normal"},
+            "fill": {"value": "#000"}
+          }
+        }
+      }
+    }
+  ],
+  "signals": [
+    {
+      "name": "hover",
+      "value": null,
+      "on": [
+        {"events": "@points_voronoi:mouseover", "update": "datum"},
+        {"events": "@points_voronoi:mouseout", "update": "null"}
+      ]
+    },
+    {
+      "name": "signal_highligtedpoint",
+      "value": "test",
+      "update": "data('highlightedPoint')[0]"
+    },
+    {"name": "signal_date_interval", "value": [663858720000, 664018320000]}
+  ],
+  "data": [
+    {
+      "name": "source",
+      "values": [
+        {
+          "datetime": 0,
+          "value": 0
+        },
+        {
+          "datetime": 0,
+          "value": 0.1
+        }
+      ],
+      "format": {"type": "json"}
+    },
+    {
+      "name": "highlightedPoint",
+      "source": "source",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "hover && hover.datum.datetime === datum.datetime && hover.datum.value === datum.value"
+        }
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "type": "rect",
+      "encode": {
+        "update": {
+          "y": {"value": 0},
+          "height": {"signal": "height"},
+          "fill": {"value": "#333"},
+          "fillOpacity": {"value": 0.1},
+          "x": {"signal": "scale('xscale', signal_date_interval[0])"},
+          "x2": {"signal": "scale('xscale', signal_date_interval[1])"}
+        }
+      }
+    },
+    {
+      "name": "Waterlevel",
+      "from": {"data": "source"},
+      "type": "line",
+      "encode": {
+        "update": {
+          "stroke": {"value": "#007BC7"},
+          "strokeWidth": {"value": 2},
+          "x": {"field": "datetime", "scale": "xscale"},
+          "y": {"field": "value", "scale": "yscale"},
+          "fillOpacity": {"value": 1},
+          "interpolate": {"value": "step"}
+        }
+      }
+    },
+    {
+      "name": "points_on_line",
+      "from": {"data": "source"},
+      "type": "symbol",
+      "encode": {
+        "update": {
+          "fill": {"value": "transparent"},
+          "size": {"value": 10},
+          "stroke": {"value": "transparent"},
+          "strokeWidth": {"value": 0.5},
+          "x": {"field": "datetime", "scale": "xscale"},
+          "y": {"value": 0}
+        }
+      }
+    },
+    {
+      "name": "points_voronoi",
+      "type": "path",
+      "from": {"data": "points_on_line"},
+      "encode": {
+        "update": {
+          "fill": {"value": "transparent"},
+          "stroke": {"value": "transparent"},
+          "isVoronoi": {"value": true},
+          "tooltip": {
+            "signal": "'Waterstand: ' +  format(datum.datum.value, '.2f') + ' m+NAP ('+ timeFormat(datum.datum.datetime, '%Y-%m-%d %H:%M'+')')"
+          }
+        }
+      },
+      "transform": [
+        {
+          "type": "voronoi",
+          "x": "datum.x",
+          "y": "datum.y",
+          "size": [{"signal": "width"}, {"signal": "height"}]
+        }
+      ]
+    },
+    {
+      "from": {"data": "highlightedPoint"},
+      "type": "rule",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {"scale": "xscale", "field": "datetime"},
+          "y": {"field": {"group": "height"}},
+          "y2": {"value": 0},
+          "stroke": {"value": "darkgrey"},
+          "strokeWidth": {"value": 2},
+          "fill": {"value": "white"}
+        }
+      }
+    },
+    {
+      "from": {"data": "highlightedPoint"},
+      "type": "symbol",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {"scale": "xscale", "field": "datetime"},
+          "y": {"scale": "yscale", "field": "value"},
+          "stroke": {"value": "green"},
+          "strokeWidth": {"value": 1.5},
+          "fill": {"value": "orange"},
+          "size": {"value": 30},
+          "strokeOpacity": {"value": 0}
+        }
+      }
+    }
+  ],
+  "scales": [
+    {
+      "domain": {"data": "source", "field": "datetime"},
+      "name": "xscale",
+      "range": "width",
+      "type": "time"
+    },
+    {
+      "domain": {"data": "source", "field": "value"},
+      "name": "yscale",
+      "range": "height",
+      "type": "linear",
+      "zero": false
+    }
+  ]
+}

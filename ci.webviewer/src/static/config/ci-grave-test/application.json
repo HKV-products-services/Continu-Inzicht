@@ -1,0 +1,1283 @@
+{
+  "application": [
+    {
+      "id": 20,
+      "name": "Continu Inzicht",
+      "customer": "Nooddam Grave",
+      "locale": "nl",
+      "menuType": "list",
+      "percentages": true,
+      "schema": "continuinzicht_grave",
+      "vega": [
+        {
+          "id": 1,
+          "name": "Section",
+          "key": "section",
+          "specName": "sectionChart",
+          "spec": "./static/config/ci-grave-test/sectionChart.json",
+          "paddingRL": 20,
+          "paddingTB": 10
+        },
+        {
+          "id": 2,
+          "name": "Station",
+          "key": "station",
+          "specName": "stationChart",
+          "spec": "./static/config/ci-grave-test/stationChart.json",
+          "paddingRL": 20,
+          "paddingTB": 10
+        },
+        {
+          "id": 3,
+          "name": "Area",
+          "key": "area",
+          "specName": "areaChart",
+          "spec": "./static/config/ci-grave-test/areaChart.json",
+          "paddingRL": 20,
+          "paddingTB": 10
+        },
+        {
+          "id": 4,
+          "name": "Scenario",
+          "key": "scenario",
+          "specName": "scenarioChart",
+          "spec": "./static/config/ci-grave-test/scenarioChart.json",
+          "paddingRL": 20,
+          "paddingTB": 10
+        },
+        {
+          "id": 5,
+          "name": "Scenario contourplot",
+          "key": "contourplot",
+          "specName": "contourplotChart",
+          "spec": "./static/config/ci-grave-test/contourplotChart.json",
+          "paddingRL": 20,
+          "paddingTB": 10
+        },
+        {
+          "id": 6,
+          "name": "costbenefit",
+          "key": "costbenefit",
+          "specName": "costBenefit",
+          "spec": "./static/config/ci-grave-test/costBenefit.json",
+          "paddingRL": 10,
+          "paddingTB": 10
+        }
+      ],
+      "openDrawers": [
+        "left"
+      ],
+      "dialogs": [
+        {
+          "title": {
+            "name": "Dijkvak:",
+            "type": "name+feature"
+          },
+          "key": "section",
+          "type": "swipeable",
+          "size": "default",
+          "views": [
+            {
+              "type": "blocks",
+              "flex": "column",
+              "wrap": true,
+              "scroll": false,
+              "blocks": [
+                {
+                  "width": "full",
+                  "height": "half",
+                  "align": "center",
+                  "content": "Faalkans",
+                  "svg": {
+                    "show": true,
+                    "size": "large",
+                    "border": false
+                  }
+                },
+                {
+                  "width": "full",
+                  "height": "small",
+                  "align": "left",
+                  "content": "Faalkans berekend",
+                  "svg": {
+                    "show": true,
+                    "size": "small",
+                    "border": false
+                  }
+                },
+                {
+                  "width": "full",
+                  "height": "small",
+                  "align": "left",
+                  "content": "Maatregel",
+                  "svg": {
+                    "show": true,
+                    "size": "small",
+                    "border": false
+                  }
+                },
+                {
+                  "width": "full",
+                  "height": "small",
+                  "align": "left",
+                  "content": "Beheerdersoordeel",
+                  "svg": {
+                    "show": true,
+                    "size": "small",
+                    "border": false
+                  }
+                }
+              ],
+              "table": {}
+            },
+            {
+              "type": "vega",
+              "options": {
+                "key": "section"
+              }
+            }
+          ],
+          "titleActions": [],
+          "dialogBottom": {
+            "actions": [
+              {
+                "name": "Ok",
+                "function": "closeDialog"
+              }
+            ]
+          }
+        },
+        {
+          "title": {
+            "name": "Locatie:",
+            "type": "name+feature"
+          },
+          "key": "station",
+          "type": "swipeable",
+          "size": "default",
+          "views": [
+            {
+              "type": "blocks",
+              "flex": "row",
+              "wrap": true,
+              "scroll": false,
+              "blocks": [
+                {
+                  "width": "half",
+                  "height": "half",
+                  "align": "center",
+                  "content": "Actuele waterstand",
+                  "svg": {}
+                },
+                {
+                  "width": "half",
+                  "height": "half",
+                  "align": "center",
+                  "content": "Maximale waterstand",
+                  "svg": {
+                    "show": true,
+                    "size": "large",
+                    "border": true
+                  }
+                },
+                {
+                  "width": "full",
+                  "height": "large",
+                  "align": "center",
+                  "content": "Status waterstand",
+                  "svg": {
+                    "show": true,
+                    "size": "large",
+                    "border": true
+                  }
+                }
+              ],
+              "table": {}
+            },
+            {
+              "type": "vega",
+              "options": {
+                "key": "station"
+              }
+            },
+            {
+              "type": "table",
+              "blocks": [],
+              "table": {
+                "columns": [
+                  {
+                    "name": "Datum en tijd"
+                  },
+                  {
+                    "name": "waterstand [m+NAP]"
+                  }
+                ]
+              }
+            }
+          ],
+          "titleActions": [],
+          "dialogBottom": {
+            "actions": [
+              {
+                "name": "Ok",
+                "function": "closeDialog"
+              }
+            ]
+          }
+        },
+        {
+          "title": {
+            "name": "Locatie:",
+            "type": "feature"
+          },
+          "key": "area",
+          "type": "swipeable",
+          "size": "default",
+          "views": [
+            {
+              "type": "blocks",
+              "flex": "row",
+              "blocks": [
+                {
+                  "width": "full",
+                  "height": "full",
+                  "align": "center",
+                  "content": "Getroffenen",
+                  "svg": {
+                    "show": true,
+                    "size": "large",
+                    "border": false
+                  }
+                }
+              ],
+              "table": {}
+            },
+            {
+              "type": "vega",
+              "options": {
+                "key": "area"
+              }
+            },
+            {
+              "type": "table",
+              "blocks": [],
+              "table": {
+                "columns": [
+                  {
+                    "name": "Datum en tijd"
+                  },
+                  {
+                    "name": "Slachtoffers"
+                  }
+                ]
+              }
+            }
+          ],
+          "titleActions": [
+            {
+              "name": "area",
+              "type": "overlay",
+              "hiddenSelect": false,
+              "disabled": false,
+              "label": null,
+              "options": [
+                {
+                  "name": "Getroffenen",
+                  "value": "RGETR"
+                },
+                {
+                  "name": "Kans op natte voeten",
+                  "value": "RPLPF"
+                },
+                {
+                  "name": "Verwachtingswaarde slachtoffers",
+                  "value": "RSL"
+                },
+                {
+                  "name": "Verwachtingswaarde schade",
+                  "value": "RSCH"
+                }
+              ]
+            }
+          ],
+          "dialogBottom": {
+            "actions": [
+              {
+                "name": "Ok",
+                "function": "closeDialog"
+              }
+            ]
+          }
+        },
+        {
+          "title": {
+            "name": "Instellingen",
+            "type": "name"
+          },
+          "key": "Instellingen",
+          "type": "simple",
+          "size": "large",
+          "views": [
+            {
+              "type": "blocks",
+              "flex": "column",
+              "wrap": false,
+              "scroll": true,
+              "blocks": [
+                {
+                  "width": "full",
+                  "height": "small",
+                  "align": "left",
+                  "content": "general",
+                  "svg": {}
+                },
+                {
+                  "width": "full",
+                  "height": "full",
+                  "align": "center",
+                  "content": "kba",
+                  "svg": {}
+                },
+                {
+                  "width": "full",
+                  "height": "full",
+                  "align": "center",
+                  "content": "basicSafety",
+                  "svg": {}
+                }
+              ],
+              "table": {}
+            }
+          ],
+          "titleActions": [],
+          "dialogBottom": {
+            "actions": [
+              {
+                "name": "Annuleren",
+                "function": "closeDialog"
+              },
+              {
+                "name": "Toepassen",
+                "function": "applySettings"
+              }
+            ]
+          }
+        },
+        {
+          "title": {
+            "name": "Berichtgeving",
+            "type": "name"
+          },
+          "key": "Berichtgeving",
+          "type": "default",
+          "size": "small",
+          "views": [
+            {
+              "type": "messaging",
+              "contentApp": "Activeer de optie 'Berichtgeving' om meldingen (push berichten) te ontvangen zodra de status van waterkeringen, waterstandslocaties of risico's in het gebied, veranderen. De statussen worden continu bijgewerkt op basis van actuele waterstanden of what-if scenario's.",
+              "contentWeb": "Activeer de optie 'Berichtgeving' om meldingen (push berichten) te ontvangen zodra de status van waterkeringen, waterstandslocaties of risico's in het gebied, veranderen. De statussen worden continu bijgewerkt op basis van actuele waterstanden of what-if scenario's.",
+              "switch": true
+            }
+          ],
+          "titleActions": [],
+          "dialogBottom": {
+            "actions": [
+              {
+                "name": "Ok",
+                "function": "closeDialog"
+              }
+            ]
+          }
+        },
+        {
+          "title": {
+            "name": "Disclaimer",
+            "type": "name"
+          },
+          "key": "Disclaimer",
+          "type": "default",
+          "size": "small",
+          "views": [
+            {
+              "type": "disclaimer",
+              "contentApp": "Deze app is een demonstratie van het NKWK project 'Continu Inzicht'. De ambitie van continu inzicht is om een methode en instrumenten te ontwikkelen om op willekeurig momenten de actuele en verwachte faalkans en risico's in beeld te hebben die ten grondslag ligt aan werkprocessen als calamiteitenmanagement, vergunningen, asset management, inspecties, beoordelen en ontwerpen. Hiervoor is één informatiebasis noodzakelijk die actueel is en continu verbeterd wordt door deze werkprocessen. Hiermee is de beheerder continu in control, en kan deze aantoonbaar verantwoorden dat de juiste keuzes worden gemaakt vanuit de opties van reductie van overstromingsrisico's en faalkansen.<h6>Toepasselijkheid</h6>Deze voorwaarden en disclaimer zijn van toepassing op onze producten, waaronder deze app. Door deze app te installeren en/of aangeboden informatie in de app te gebruiken, verklaart u zich akkoord met de toepasselijkheid van deze disclaimer.<h6>Zorgvuldigheid</h6>HKV neemt zorgvuldigheid in acht bij het samenstellen en onderhouden van deze app en de gegevens die worden weergegeven, maar kan de juistheid, volledigheid en actualiteit van de aangeboden informatie niet garanderen. HKV sluit iedere aansprakelijkheid uit voor directe en indirecte schade, welke aard dan ook, die verband houdt met het gebruik van deze app, waaronder schade die het gevolg is van het gebruik van informatie die door deze app is verkregen.<h6>Eigendomsvoorbehoud</h6>HKV behoudt alle intellectuele eigendomsrechten en andere rechten van deze app. het is alleen na voorafgaande schriftelijke toestemming van HKV toegestaan de informatie en/of de huisstijl te kopiëren, te vermenigvuldigen, te bewerken of door te leveren.<h6>Gebruikte gegevens</h6>De getoonde situatie geeft een benadering van de werkelijkheid. De sterkte van waterkeringen is bepaald op basis van basisinformatie van waterkeringen uit VNK2. Met de nieuwe rekenregels uit WBI zijn eenvoudige fragility curves opgesteld waarmee de totale faalkans, als ook de kansbijdrage van verschillende faalmechanisme zijn beschreven. In deze curves is een aantal beheermaatregelen verwerkt maar deze zijn nog niet uitgebreid gevalideerd. De risico's geven een indicatie van het schade- en slachtofferrisico. De criteria voor statuswijzigingen van keringen, waterstanden en gebieden zijn met het projectteam gekozen.<br/><br/>Zowel de app als de viewer maken gebruik van een centrale informatielaag. Deze informatielaag, onder single point of truth, wordt gebruikt voor alle toepassingen. De informatielaag kan ook worden verrijkt door te gebruiken in allerlei werkprocessen. De informatielaag wordt gevoed met data uit allerlei bronnen. Zo zijn het WBI, LIWO, neerslag en verdampingsradar belangrijke bronnen voor continu inzicht.<br/><br/>Voor meer informatie over de gebruikte gegevens, uitgangspunten en de kennisdoorwerking voor bijvoorbeeld beheer en onderhoud, inspecties, de zorgplicht en crisisbeheersing, wordt verwezen naar het hoofdrapport 'hoofdrapport continu inzicht (14 december).pdf. Dit rapport is op te vragen bij HKV.<h6>Privacy</h6>In deze app worden geen persoonlijke gegevens verwerkt. Voor het kunnen versturen van meldingen (push berichten) is het noodzakelijk dat uw telefoon of uw browser wordt geregistreerd bij Google Cloud Messaging. Deze registratie is niet gekoppeld aan persoonsgegevens en deze zijn ook niet te herleiden. Wij verzamelen geen gebruikersdata en slaan deze gegevens niet op voor andere doeleinden anders dan het versturen van meldingen (push berichten).<h6>Overige voorwaarden</h6>Voor zover deze niet afwijken van bovenstaande, zijn op deze app en het gebruik ervan verder van toepassing de Nederland ICT Voorwaarden 2014. Een kopie van deze voorwaarden kunt u opvragen bij HKV. Deze voorwaarden en disclaimer zijn van toepassing op onze producten, waaronder deze app. Door deze app te installeren en/of aangeboden informatie in de app te gebruiken, verklaart u zich akkoord met de toepasselijkheid van deze disclaimer.",
+              "contentWeb": "Deze viewer is een demonstratie van het NKWK project 'Continu Inzicht'. De ambitie van continu inzicht is om een methode en instrumenten te ontwikkelen om op willekeurig momenten de actuele en verwachte faalkans en risico's in beeld te hebben die ten grondslag ligt aan werkprocessen als calamiteitenmanagement, vergunningen, asset management, inspecties, beoordelen en ontwerpen. Hiervoor is één informatiebasis noodzakelijk die actueel is en continu verbeterd wordt door deze werkprocessen. Hiermee is de beheerder continu in control, en kan deze aantoonbaar verantwoorden dat de juiste keuzes worden gemaakt vanuit de opties van reductie van overstromingsrisico's en faalkansen.<h6>Toepasselijkheid</h6>Deze voorwaarden en disclaimer zijn van toepassing op onze producten, waaronder deze viewer. Door deze viewer te installeren en/of aangeboden informatie in de viewer te gebruiken, verklaart u zich akkoord met de toepasselijkheid van deze disclaimer.<h6>Zorgvuldigheid</h6>HKV neemt zorgvuldigheid in acht bij het samenstellen en onderhouden van deze viewer en de gegevens die worden weergegeven, maar kan de juistheid, volledigheid en actualiteit van de aangeboden informatie niet garanderen. HKV sluit iedere aansprakelijkheid uit voor directe en indirecte schade, welke aard dan ook, die verband houdt met het gebruik van deze viewer, waaronder schade die het gevolg is van het gebruik van informatie die door deze viewer is verkregen.<h6>Eigendomsvoorbehoud</h6>HKV behoudt alle intellectuele eigendomsrechten en andere rechten van deze viewer. het is alleen na voorafgaande schriftelijke toestemming van HKV toegestaan de informatie en/of de huisstijl te kopiëren, te vermenigvuldigen, te bewerken of door te leveren.<h6>Gebruikte gegevens</h6>De getoonde situatie geeft een benadering van de werkelijkheid. De sterkte van waterkeringen is bepaald op basis van basisinformatie van waterkeringen uit VNK2. Met de nieuwe rekenregels uit WBI zijn eenvoudige fragility curves opgesteld waarmee de totale faalkans, als ook de kansbijdrage van verschillende faalmechanisme zijn beschreven. In deze curves is een aantal beheermaatregelen verwerkt maar deze zijn nog niet uitgebreid gevalideerd. De risico's geven een indicatie van het schade- en slachtofferrisico. De criteria voor statuswijzigingen van keringen, waterstanden en gebieden zijn met het projectteam gekozen.<br/><br/>Zowel de app als de viewer maken gebruik van een centrale informatielaag. Deze informatielaag, onder single point of truth, wordt gebruikt voor alle toepassingen. De informatielaag kan ook worden verrijkt door te gebruiken in allerlei werkprocessen. De informatielaag wordt gevoed met data uit allerlei bronnen. Zo zijn het WBI, LIWO, neerslag en verdampingsradar belangrijke bronnen voor continu inzicht.<br/><br/>Voor meer informatie over de gebruikte gegevens, uitgangspunten en de kennisdoorwerking voor bijvoorbeeld beheer en onderhoud, inspecties, de zorgplicht en crisisbeheersing, wordt verwezen naar het hoofdrapport 'hoofdrapport continu inzicht (14 december).pdf. Dit rapport is op te vragen bij HKV.<h6>Privacy</h6>In deze viewer worden geen persoonlijke gegevens verwerkt. Voor het kunnen versturen van meldingen (push berichten) is het noodzakelijk dat uw telefoon of uw browser wordt geregistreerd bij Google Cloud Messaging. Deze registratie is niet gekoppeld aan persoonsgegevens en deze zijn ook niet te herleiden. Wij verzamelen geen gebruikersdata en slaan deze gegevens niet op voor andere doeleinden anders dan het versturen van meldingen (push berichten).<h6>Overige voorwaarden</h6>Voor zover deze niet afwijken van bovenstaande, zijn op deze viewer en het gebruik ervan verder van toepassing de Nederland ICT Voorwaarden 2014. Een kopie van deze voorwaarden kunt u opvragen bij HKV. Deze voorwaarden en disclaimer zijn van toepassing op onze producten, waaronder deze viewer. Door deze viewer te installeren en/of aangeboden informatie in de viewer te gebruiken, verklaart u zich akkoord met de toepasselijkheid van deze disclaimer.",
+              "switch": false
+            }
+          ],
+          "titleActions": [],
+          "dialogBottom": {
+            "actions": [
+              {
+                "name": "Ok",
+                "function": "closeDialog"
+              }
+            ]
+          }
+        },
+        {
+          "title": {
+            "name": "Maatschappelijke kosten/baten analyse",
+            "type": "name"
+          },
+          "key": "Analyse",
+          "type": "swipeableModal",
+          "size": "small",
+          "views": [
+            {
+              "type": "blocks",
+              "flex": "column",
+              "wrap": false,
+              "scroll": false,
+              "subtitle": "alert",
+              "blocks": [
+                {
+                  "width": "full",
+                  "height": "small",
+                  "align": "left",
+                  "content": "analyse_inputs",
+                  "kbaname": "alert",
+                  "contents": [
+                    {
+                      "name": "Kosten maatregel",
+                      "key": "costs",
+                      "unit": "euro",
+                      "class": "kba"
+                    },
+                    {
+                      "name": "Uitvoertijd maatregel",
+                      "key": "executiontime",
+                      "unit": "uur",
+                      "class": "kba"
+                    },
+                    {
+                      "name": "Waarde slachtoffer",
+                      "key": "victimvalue",
+                      "unit": "euro",
+                      "class": "general"
+                    }
+                  ]
+                },
+                {
+                  "width": "full",
+                  "height": "full",
+                  "align": "center",
+                  "content": "analyse_vega",
+                  "specName": "costbenefit",
+                  "options": {
+                    "kbaname": "alert",
+                    "key": "alert"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "blocks",
+              "flex": "column",
+              "wrap": false,
+              "scroll": false,
+              "subtitle": "paraat",
+              "blocks": [
+                {
+                  "width": "full",
+                  "height": "small",
+                  "align": "left",
+                  "content": "analyse_inputs",
+                  "kbaname": "paraat",
+                  "contents": [
+                    {
+                      "name": "Kosten maatregel",
+                      "key": "costs",
+                      "unit": "euro",
+                      "class": "kba"
+                    },
+                    {
+                      "name": "Uitvoertijd maatregel",
+                      "key": "executiontime",
+                      "unit": "uur",
+                      "class": "kba"
+                    },
+                    {
+                      "name": "Waarde slachtoffer",
+                      "key": "victimvalue",
+                      "unit": "euro",
+                      "class": "general"
+                    }
+                  ]
+                },
+                {
+                  "width": "full",
+                  "height": "full",
+                  "align": "center",
+                  "content": "analyse_vega",
+                  "specName": "costbenefit",
+                  "options": {
+                    "kbaname": "paraat",
+                    "key": "paraat"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "blocks",
+              "flex": "column",
+              "wrap": false,
+              "scroll": false,
+              "subtitle": "opstellen",
+              "blocks": [
+                {
+                  "width": "full",
+                  "height": "small",
+                  "align": "left",
+                  "content": "analyse_inputs",
+                  "kbaname": "opstellen",
+                  "contents": [
+                    {
+                      "name": "Kosten maatregel",
+                      "key": "costs",
+                      "unit": "euro",
+                      "class": "kba"
+                    },
+                    {
+                      "name": "Uitvoertijd maatregel",
+                      "key": "executiontime",
+                      "unit": "uur",
+                      "class": "kba"
+                    },
+                    {
+                      "name": "Waarde slachtoffer",
+                      "key": "victimvalue",
+                      "unit": "euro",
+                      "class": "general"
+                    }
+                  ]
+                },
+                {
+                  "width": "full",
+                  "height": "full",
+                  "align": "center",
+                  "content": "analyse_vega",
+                  "specName": "costbenefit",
+                  "options": {
+                    "kbaname": "opstellen",
+                    "key": "opstellen"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "blocks",
+              "flex": "column",
+              "wrap": false,
+              "scroll": false,
+              "subtitle": "uitvoeren",
+              "blocks": [
+                {
+                  "width": "full",
+                  "height": "small",
+                  "align": "left",
+                  "content": "analyse_inputs",
+                  "kbaname": "uitvoeren",
+                  "contents": [
+                    {
+                      "name": "Kosten maatregel",
+                      "key": "costs",
+                      "unit": "euro",
+                      "class": "kba"
+                    },
+                    {
+                      "name": "Uitvoertijd maatregel",
+                      "key": "executiontime",
+                      "unit": "uur",
+                      "class": "kba"
+                    },
+                    {
+                      "name": "Waarde slachtoffer",
+                      "key": "victimvalue",
+                      "unit": "euro",
+                      "class": "general"
+                    }
+                  ]
+                },
+                {
+                  "width": "full",
+                  "height": "full",
+                  "align": "center",
+                  "content": "analyse_vega",
+                  "specName": "costbenefit",
+                  "options": {
+                    "kbaname": "uitvoeren",
+                    "key": "uitvoeren"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "blocks",
+              "flex": "column",
+              "wrap": false,
+              "scroll": false,
+              "subtitle": "1-besluit",
+              "blocks": [
+                {
+                  "width": "full",
+                  "height": "small",
+                  "align": "left",
+                  "content": "analyse_inputs",
+                  "kbaname": "1-besluit",
+                  "contents": [
+                    {
+                      "name": "Kosten maatregel",
+                      "key": "costs",
+                      "unit": "euro",
+                      "class": "kba"
+                    },
+                    {
+                      "name": "Uitvoertijd maatregel",
+                      "key": "executiontime",
+                      "unit": "uur",
+                      "class": "kba"
+                    },
+                    {
+                      "name": "Waarde slachtoffer",
+                      "key": "victimvalue",
+                      "unit": "euro",
+                      "class": "general"
+                    }
+                  ]
+                },
+                {
+                  "width": "full",
+                  "height": "full",
+                  "align": "center",
+                  "content": "analyse_vega",
+                  "specName": "costbenefit",
+                  "options": {
+                    "kbaname": "1-besluit",
+                    "key": "1-besluit"
+                  }
+                }
+              ]
+            }
+          ],
+          "titleActions": [],
+          "dialogBottom": {
+            "actions": [
+              {
+                "name": "Ok",
+                "function": "closeModal"
+              }
+            ]
+          }
+        },
+        {
+          "title": {
+            "name": "Basisveiligheid",
+            "type": "name"
+          },
+          "key": "Basisveiligheid",
+          "type": "swipeableModal",
+          "size": "small",
+          "views": [
+            {
+              "type": "blocks",
+              "flex": "column",
+              "wrap": false,
+              "scroll": false,
+              "subtitle": "Zonder maatregel",
+              "blocks": [
+                {
+                  "width": "full",
+                  "height": "small",
+                  "align": "left",
+                  "content": "basisveiligheid_inputs",
+                  "contents": [
+                    {
+                      "name": "Groen",
+                      "key": "normaal",
+                      "unit": "per jaar",
+                      "class": "kba"
+                    },
+                    {
+                      "name": "Geel/oranje",
+                      "key": "groot",
+                      "unit": "per jaar",
+                      "class": "kba"
+                    },
+                    {
+                      "name": "Rood",
+                      "key": "zeer groot",
+                      "unit": "per jaar",
+                      "class": "kba"
+                    }
+                  ],
+                  "svg": {}
+                },
+                {
+                  "width": "full",
+                  "height": "full",
+                  "align": "center",
+                  "content": "map",
+                  "mapKey": 0,
+                  "svg": {}
+                }
+              ],
+              "table": {}
+            },
+            {
+              "type": "blocks",
+              "flex": "column",
+              "wrap": false,
+              "scroll": false,
+              "subtitle": "Met maatregel",
+              "blocks": [
+                {
+                  "width": "full",
+                  "height": "small",
+                  "align": "left",
+                  "content": "basisveiligheid_inputs",
+                  "contents": [
+                    {
+                      "name": "Groen",
+                      "key": "normaal",
+                      "unit": "per jaar",
+                      "class": "kba"
+                    },
+                    {
+                      "name": "Geel/oranje",
+                      "key": "groot",
+                      "unit": "per jaar",
+                      "class": "kba"
+                    },
+                    {
+                      "name": "Rood",
+                      "key": "zeer groot",
+                      "unit": "per jaar",
+                      "class": "kba"
+                    }
+                  ],
+                  "svg": {}
+                },
+                {
+                  "width": "full",
+                  "height": "full",
+                  "align": "center",
+                  "content": "map",
+                  "mapKey": 1,
+                  "svg": {}
+                }
+              ],
+              "table": {}
+            }
+          ],
+          "titleActions": [],
+          "dialogBottom": {
+            "actions": [
+              {
+                "name": "Ok",
+                "function": "closeModal"
+              }
+            ]
+          }
+        },
+        {
+          "title": {
+            "name": "Multi criteria analyse",
+            "type": "name"
+          },
+          "key": "MultiAnalyse",
+          "type": "modal",
+          "size": "small",
+          "views": [
+            {
+              "type": "table",
+              "flex": "column",
+              "blocks": [],
+              "table": {
+                "columns": []
+              }
+            }
+          ],
+          "titleActions": [],
+          "dialogBottom": {
+            "actions": [
+              {
+                "name": "Toevoegen",
+                "function": "addAnalyse"
+              },
+              {
+                "name": "Ok",
+                "function": "closeModal"
+              }
+            ]
+          }
+        }
+      ],
+      "stationOptions": {
+        "defaultStationName": "Grave beneden",
+        "defaultStationId": 5,
+        "descriptionType": 1,
+        "remoteLayers": [
+          "SAMO",
+          "MOOK",
+          "GRAV"
+        ]
+      },
+      "enbankmentStatus": true,
+      "startMenuActive": true,
+      "startMenuStyle": "icons",
+      "startMenu": [
+        {
+          "active": false,
+          "index": 0,
+          "label": "Real time inzicht",
+          "key": "",
+          "mainMenu": []
+        },
+        {
+          "active": false,
+          "index": 1,
+          "label": "What-if inzicht",
+          "key": "",
+          "mainMenu": [
+            {
+              "key": "scenario",
+              "label": "Scenario",
+              "hideInApp": false
+            }
+          ]
+        },
+        {
+          "active": false,
+          "index": 2,
+          "label": "Rapportages",
+          "key": "/rapportages",
+          "mainMenu": []
+        },
+        {
+          "active": false,
+          "index": 3,
+          "label": "Risicogestuurd beheer",
+          "key": "",
+          "mainMenu": []
+        },
+        {
+          "active": true,
+          "index": 4,
+          "label": "Beslissen onder onzekerheid",
+          "key": "",
+          "mainMenu": [
+            {
+              "key": "scenario",
+              "label": "Scenario",
+              "hideInApp": false,
+              "type": "listItem"
+            }
+          ]
+        }
+      ],
+      "settingsMenu": [
+        {
+          "key": "instellingen",
+          "label": "Instellingen",
+          "hideInApp": false,
+          "type": "listItem"
+        }
+      ],
+      "analyseMenu": [
+        {
+          "key": "Analyse",
+          "label": "Maatschappelijke kosten/baten analyse",
+          "selection": "check"
+        },
+        {
+          "key": "Basisveiligheid",
+          "label": "Basisveiligheid",
+          "selection": "check"
+        },
+        {
+          "key": "MultiAnalyse",
+          "label": "Multi criteria analyse",
+          "selection": "check"
+        }
+      ],
+      "subMenu": [
+        {
+          "key": "",
+          "label": "Map",
+          "dialog": false,
+          "hideInWeb": false
+        },
+        {
+          "key": "",
+          "label": "Berichtgeving",
+          "dialog": true,
+          "hideInWeb": true
+        },
+        {
+          "key": "",
+          "label": "Disclaimer",
+          "dialog": true,
+          "hideInWeb": false
+        }
+      ],
+      "map": {
+        "settings": {
+          "center": {
+            "lat": 51.90,
+            "lon": 5.53
+          },
+          "zoom": 10,
+          "minzoom": 8,
+          "maxzoom": 18,
+          "controls": {
+            "attribution": {
+              "show": true,
+              "position": "bottomright"
+            },
+            "zoom": {
+              "show": true,
+              "position": "bottomright",
+              "options": {}
+            },
+            "scale": {
+              "show": true,
+              "position": "bottomleft",
+              "options": {
+                "imperial": false,
+                "metric": true
+              }
+            }
+          }
+        },
+        "baselayers": [
+          {
+            "name": "Luchtfoto",
+            "active": false,
+            "key": "luchtfoto",
+            "url": "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+            "options": {
+              "attribution": "&copy; <a href='http://www.esri.com/' target='_blank'>Esri</a>, | <a href='http://www.hkv.nl/' target='_blank'>HKV Services</a>"
+            }
+          },
+          {
+            "name": "Topografische kaart",
+            "key": "Topografische kaart",
+            "active": true,
+            "url": "https://services.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}",
+            "options": {
+              "attribution": "&copy; <a href='http://www.esri.com/' target='_blank'>Esri</a>, | <a href='http://www.hkv.nl/' target='_blank'>HKV Services</a>"
+            }
+          }
+        ],
+        "overlays": [
+          {
+            "type": "geojson",
+            "paneType": "overlay",
+            "name": "Dijkvakken",
+            "key": "dijkvakken",
+            "view": "waterkeringen",
+            "selection": "check",
+            "url": "https://tsws.hkvservices.nl/mangrove.github.ws/entry.asmx/Call?function=ci.appfunctions.GetFeatures&parameters={objecttype:%27section%27,appid:20}",
+            "active": true,
+            "refresh": true,
+            "zoomto": true,
+            "style": {
+              "type": "moment",
+              "moment_style": [
+                {
+                  "property": "avg_now",
+                  "style": "fillColor"
+                },
+                {
+                  "property": "avg_now",
+                  "style": "color"
+                }
+              ],
+              "color": "#bbb",
+              "weight": 10
+            },
+            "tooltip": {
+              "show": true,
+              "fields": [
+                {
+                  "title": "Naam",
+                  "field": "name"
+                },
+                {
+                  "title": "Id",
+                  "field": "sectionid"
+                }
+              ]
+            }
+          },
+          {
+            "type": "geojson",
+            "paneType": "marker",
+            "name": "Meetstations",
+            "key": "meetstations",
+            "view": "waterstanden",
+            "selection": "check",
+            "url": "https://tsws.hkvservices.nl/mangrove.github.ws/entry.asmx/Call?function=ci.appfunctions.GetFeatures&parameters={objecttype:%27measuringstation%27,appid:20}",
+            "active": false,
+            "refresh": true,
+            "zoomto": true,
+            "style": {
+              "type": "icon",
+              "property_style": [
+                {
+                  "property": "avg_now",
+                  "style": "fillColor"
+                },
+                {
+                  "property": "avg_now",
+                  "style": "color"
+                }
+              ],
+              "iconSize": {"x": 46, "y": 46}
+            },
+            "tooltip": {
+              "show": true,
+              "fields": [
+                {
+                  "title": "Naam",
+                  "field": "name"
+                }
+              ]
+            }
+          },
+          {
+            "type": "geojson",
+            "paneType": "overlay",
+            "name": "Getroffenen",
+            "key": "RGETR",
+            "view": "gebieden",
+            "selection": "radio",
+            "url": "https://tsws.hkvservices.nl/mangrove.github.ws/entry.asmx/Call?function=ci.appfunctions.GetFeatures&parameters={objecttype:%27area%27,parameterid:10,appid:20}",
+            "active": false,
+            "refresh": true,
+            "zoomto": false,
+            "style": {
+              "type": "moment",
+              "moment_style": [
+                {
+                  "property": "avg_now",
+                  "style": "fillColor"
+                },
+                {
+                  "property": "avg_now",
+                  "style": "color"
+                }
+              ],
+              "color": "#bbb",
+              "weight": 1,
+              "opacity": 1,
+              "fillOpacity": 0.5
+            },
+            "tooltip": {
+              "show": true,
+              "fields": [
+                {
+                  "title": "Naam",
+                  "field": "name"
+                },
+                {
+                  "title": "Postcode id",
+                  "field": "zip"
+                },
+                {
+                  "title": "Inwoners",
+                  "field": "people"
+                }
+              ]
+            }
+          },
+          {
+            "type": "geojson",
+            "paneType": "overlay",
+            "name": "Verwachtingswaarde slachtoffers",
+            "key": "RSL",
+            "view": "gebieden",
+            "selection": "radio",
+            "url": "https://tsws.hkvservices.nl/mangrove.github.ws/entry.asmx/Call?function=ci.appfunctions.GetFeatures&parameters={objecttype:%27area%27,parameterid:9,appid:20}",
+            "active": false,
+            "refresh": true,
+            "zoomto": false,
+            "style": {
+              "type": "moment",
+              "moment_style": [
+                {
+                  "property": "avg_now",
+                  "style": "fillColor"
+                },
+                {
+                  "property": "avg_now",
+                  "style": "color"
+                }
+              ],
+              "color": "#bbb",
+              "weight": 1,
+              "opacity": 1,
+              "fillOpacity": 0.5
+            },
+            "tooltip": {
+              "show": true,
+              "fields": [
+                {
+                  "title": "Naam",
+                  "field": "name"
+                },
+                {
+                  "title": "Postcode id",
+                  "field": "zip"
+                },
+                {
+                  "title": "Inwoners",
+                  "field": "people"
+                }
+              ]
+            }
+          },
+          {
+            "type": "geojson",
+            "paneType": "overlay",
+            "name": "Verwachtingswaarde schade",
+            "key": "RSCH",
+            "view": "gebieden",
+            "selection": "radio",
+            "url": "https://tsws.hkvservices.nl/mangrove.github.ws/entry.asmx/Call?function=ci.appfunctions.GetFeatures&parameters={objecttype:%27area%27,parameterid:8,appid:20}",
+            "active": false,
+            "refresh": true,
+            "zoomto": false,
+            "style": {
+              "type": "moment",
+              "moment_style": [
+                {
+                  "property": "avg_now",
+                  "style": "fillColor"
+                },
+                {
+                  "property": "avg_now",
+                  "style": "color"
+                }
+              ],
+              "color": "#bbb",
+              "weight": 1,
+              "opacity": 1,
+              "fillOpacity": 0.5
+            },
+            "tooltip": {
+              "show": true,
+              "fields": [
+                {
+                  "title": "Naam",
+                  "field": "name"
+                },
+                {
+                  "title": "Postcode id",
+                  "field": "zip"
+                },
+                {
+                  "title": "Inwoners",
+                  "field": "people"
+                }
+              ]
+            }
+          },
+          {
+            "type": "geojson",
+            "paneType": "overlay",
+            "name": "Kans op natte voeten",
+            "key": "RPLPF",
+            "view": "gebieden",
+            "selection": "radio",
+            "url": "https://tsws.hkvservices.nl/mangrove.github.ws/entry.asmx/Call?function=ci.appfunctions.GetFeatures&parameters={objecttype:%27area%27,parameterid:11,appid:20}",
+            "active": false,
+            "refresh": true,
+            "zoomto": false,
+            "style": {
+              "type": "moment",
+              "moment_style": [
+                {
+                  "property": "avg_now",
+                  "style": "fillColor"
+                },
+                {
+                  "property": "avg_now",
+                  "style": "color"
+                }
+              ],
+              "color": "#bbb",
+              "weight": 1,
+              "opacity": 1,
+              "fillOpacity": 0.5
+            },
+            "tooltip": {
+              "show": true,
+              "fields": [
+                {
+                  "title": "Naam",
+                  "field": "name"
+                },
+                {
+                  "title": "Postcode id",
+                  "field": "zip"
+                },
+                {
+                  "title": "Inwoners",
+                  "field": "people"
+                }
+              ]
+            }
+          },
+          {
+            "type": "geojson",
+            "paneType": "overlay",
+            "name": "Area costs and benefits",
+            "key": "areacostsandbenefits",
+            "view": "areacostsandbenefits",
+            "selection": "check",
+            "url": "https://tsws.hkvservices.nl/mangrove.github.ws/entry.asmx/Call?function=ci.appfunctions.GetFeatures&parameters={appid:20,objecttype:%22areacostsandbenefits%22}",
+            "active": true,
+            "refresh": true,
+            "zoomto": true,
+            "style": {
+              "type": "condition",
+              "condition_style": [
+                {
+                  "property": "casualties",
+                  "style": "fillColor"
+                },
+                {
+                  "property": "casualties",
+                  "style": "color"
+                }
+              ],
+              "color": "#bbb",
+              "weight": 1,
+              "opacity": 1,
+              "fillOpacity": 0.5
+            },
+            "tooltip": {
+              "show": true,
+              "fields": [
+                {
+                  "title": "Naam",
+                  "field": "name"
+                },
+                {
+                  "title": "Slachtoffers zonder maatregel (met stuw)",
+                  "field": "casualties0"
+                },
+                {
+                  "title": "Slachtoffers met maatregel (zonder stuw)",
+                  "field": "casualties1"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

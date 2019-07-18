@@ -1,0 +1,592 @@
+{
+  "width": 400,
+  "height": 350,
+  "autosize": {"type": "fit", "resize": true},
+  "padding": 0,
+  "signals": [
+    {
+      "name": "legend_orient",
+      "value": "right"
+    }
+  ],
+  "data": [
+    {
+      "name": "conditions",
+      "values": [
+        {
+          "lowerboundary": 0.5,
+          "upperboundary": 1.5,
+          "color": "#E8FBE8",
+          "description": "Cat. I"
+        },
+        {
+          "lowerboundary": 1.5,
+          "upperboundary": 2.5,
+          "color": "#CCE5CC",
+          "description": "Cat. II"
+        },
+        {
+          "lowerboundary": 2.5,
+          "upperboundary": 3.5,
+          "color": "#FFFFCC",
+          "description": "Cat. III"
+        },
+        {
+          "lowerboundary": 3.5,
+          "upperboundary": 4.5,
+          "color": "#FFEDCC",
+          "description": "Cat. IV"
+        },
+        {
+          "lowerboundary": 4.5,
+          "upperboundary": 5.5,
+          "color": "#FFCCCC",
+          "description": "Cat. V"
+        },
+        {
+          "lowerboundary": 5.5,
+          "upperboundary": 6.5,
+          "color": "#E7CCCC",
+          "description": "Cat. VI"
+        }
+      ]
+    },
+    {
+      "name": "risk",
+      "values": [],
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.failuremechanism"
+        }
+      ]
+    },
+    {
+      "name": "risk_open",
+      "source": "risk",
+      "transform": [{
+        "type": "filter",
+        "expr": "datum.condition === 'open'" }
+      ]
+    },
+    {
+      "name": "risk_gesloten",
+      "source": "risk",
+      "transform": [{
+        "type": "filter",
+        "expr": "datum.condition === 'gesloten'" }
+      ]
+    },
+    {
+      "name": "yearvalue",
+      "source": "risk",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.condition === 'open' && datum.datetime === 2023 && datum.failuremechanism === 'gebu' || datum.failuremechanism === 'gekb'"
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "xscale",
+      "type": "linear",
+      "range": "width",
+      "domain": [
+        2015,
+        2105
+      ],
+      "zero": false
+    },
+    {
+      "name": "yscale",
+      "type": "linear",
+      "range": "height",
+      "domain": {
+        "data": "conditions",
+        "fields": [
+          "upperboundary",
+          "lowerboundary"
+        ]
+      },
+      "zero": false,
+      "reverse": true
+    },
+    {
+      "name": "ylabels",
+      "type": "ordinal",
+      "range": [
+        "Cat. I",
+        "Cat. II",
+        "Cat. III",
+        "Cat. IV",
+        "Cat. V",
+        "Cat. VI"
+      ]
+    },
+    {
+      "name": "color_wl",
+      "type": "ordinal",
+      "domain": {
+        "data": "risk",
+        "field": "condition"
+      },
+      "range": {
+        "scheme": "category20"
+      }
+    },
+    {
+      "name": "legend_cd",
+      "type": "ordinal",
+      "domain": {
+        "data": "conditions",
+        "field": "description"
+      },
+      "range": {
+        "data": "conditions",
+        "field": "color"
+      }
+    }
+  ],
+  "axes": [
+    {
+      "orient": "left",
+      "scale": "yscale",
+      "title": "Categorieindeling kans (-)",
+      "titlePadding": 10,
+      "values": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+     "grid": true,
+      "encode": {
+        "ticks": {
+          "update": {
+            "stroke": {
+              "value": "#000"
+            },
+            "strokeWidth": {
+              "value": 0.5
+            }
+          }
+        },
+        "title": {
+          "update": {
+            "font": {
+              "value": "Verdana"
+            },
+            "fontSize": {
+              "value": 14
+            },
+            "fontWeight": {
+              "value": "normal"
+            },
+            "fill": {
+              "value": "#000"
+            }
+          }
+        },
+        "labels": {
+          "update": {
+            "text": {
+              "scale": "ylabels",
+              "field": "value"
+            },
+            "font": {
+              "value": "Verdana"
+            },
+            "fontSize": {
+              "value": 14
+            },
+            "fontWeight": {
+              "value": "normal"
+            },
+            "fill": {
+              "value": "#000"
+            }
+          }
+        }
+      }
+    },
+    {
+      "orient": "bottom",
+      "scale": "xscale",
+      "title": "Zichtjaren (-)",
+      "format": ".0f",
+      "labelOverlap": true,
+      "values": [
+        2020,
+        2040,
+        2060,
+        2080,
+        2100
+      ],
+      "encode": {
+        "ticks": {
+          "update": {
+            "stroke": {
+              "value": "#000"
+            },
+            "strokeWidth": {
+              "value": 0.5
+            }
+          }
+        },
+        "title": {
+          "update": {
+            "font": {
+              "value": "Verdana"
+            },
+            "fontSize": {
+              "value": 14
+            },
+            "fontWeight": {
+              "value": "normal"
+            },
+            "fill": {
+              "value": "#000"
+            }
+          }
+        },
+        "labels": {
+          "update": {
+            "font": {
+              "value": "Verdana"
+            },
+            "fontSize": {
+              "value": 14
+            },
+            "fontWeight": {
+              "value": "normal"
+            },
+            "fill": {
+              "value": "#000"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "marks": [
+    {
+      "name": "Cond",
+      "type": "rect",
+      "style": [
+        "rect"
+     ],
+      "from": {
+        "data": "conditions"
+      },
+      "encode": {
+        "update": {
+          "fill": {
+            "scale": "legend_cd",
+            "field": "description"
+          },
+          "x": {
+            "value": 0
+          },
+         "x2": {
+            "signal": "width"
+          },
+          "y": {
+            "scale": "yscale",
+            "field": "lowerboundary"
+          },
+          "y2": {
+            "scale": "yscale",
+            "field": "upperboundary"
+          }
+        }
+      }
+    },
+    {
+      "name": "activeyear",
+      "type": "rule",
+      "from": {
+        "data": "yearvalue"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "scale": "xscale",
+            "field": "jaar"
+          },
+          "y": {
+            "value": 0
+          },
+          "y2": {
+            "signal": "height"
+          },
+          "stroke": {
+            "value": "#000000"
+          },
+          "strokeWidth": {
+            "value": 2
+          },
+          "strokeDash": {
+            "value": [
+              8,
+              8
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "activeyearvalue",
+      "type": "text",
+      "from": {"data": "yearvalue"},
+      "encode": {
+        "update": {
+          "x": {"scale": "xscale", "field": "jaar"},
+          "y2": {"value": -10},
+          "align": {"value": "center"},
+          "text": {"field": "jaar"},
+          "font": {
+              "value": "Verdana"
+            },
+            "fontSize": {
+              "value": 14
+            },
+            "fontWeight": {
+              "value": "normal"
+            },
+            "fill": {
+              "value": "#000"
+            }
+        }
+      }
+    },
+    {
+      "from": {
+        "facet": {
+          "data": "risk_open",
+          "groupby": "condition",
+          "name": "risk_series_open"
+        }
+      },
+      "marks": [
+        {
+          "type": "line",
+          "from": {
+            "data": "risk_series_open"
+          },
+          "encode": {
+            "update": {
+              "stroke": {
+                "field": "condition",
+                "scale": "color_wl"
+              },
+              "strokeWidth": {
+                "value": 2
+              },
+              "x": {
+                "field": "datetime",
+                "scale": "xscale"
+              },
+              "y": {
+                "field": "value",
+                "scale": "yscale"
+              },
+              "interpolate": {
+                "value": "linear"
+              }
+            }
+          }
+        },
+        {
+          "type": "symbol",
+          "from": {
+            "data": "risk_series_open"
+          },
+          "encode": {
+            "update": {
+              "stroke": {
+                "field": "condition",
+                "scale": "color_wl"
+              },
+              "strokeWidth": {
+                "value": 5
+              },
+              "x": {
+                "field": "datetime",
+                "scale": "xscale"
+              },
+              "y": {
+                "field": "value",
+                "scale": "yscale"
+              },
+              "fill": {
+                "field": "condition",
+                "scale": "color_wl"
+              },
+              "tooltip": {
+                "signal": "'Categorie: ' +  format(datum.value, '.0f') + ' Jaar: ' + datum.datetime + ' Toestand: ' + datum.condition"
+              }
+            },
+            "hover": {
+              "fill": {
+                "value": "red"
+              }
+            }
+          }
+        }
+      ],
+      "type": "group"
+    },
+    {
+      "from": {
+        "facet": {
+          "data": "risk_gesloten",
+          "groupby": "condition",          
+          "name": "risk_series_gesloten"
+        }
+      },
+      "marks": [
+        {
+          "type": "line",
+          "from": {
+            "data": "risk_series_gesloten"
+          },
+          "encode": {
+            "update": {
+              "stroke": {
+                "field": "condition",
+                "scale": "color_wl"
+              },
+              "strokeWidth": {
+                "value": 2
+              },
+              "x": {
+                "field": "datetime",
+                "scale": "xscale"
+              },
+              "y": {
+                "field": "value",
+                "scale": "yscale"
+              },
+              "interpolate": {
+                "value": "linear"
+              },
+              "strokeDash": {
+                "value": [
+                  8,
+                  8
+                ]
+              }
+            }
+          }
+        },
+        {
+          "type": "symbol",
+          "from": {
+            "data": "risk_series_gesloten"
+          },
+          "encode": {
+            "update": {
+              "stroke": {
+                "field": "condition",
+                "scale": "color_wl"
+              },
+              "strokeWidth": {
+                "value": 2
+              },
+              "x": {
+                "field": "datetime",
+                "scale": "xscale"
+              },
+              "y": {
+                "field": "value",
+                "scale": "yscale"
+              },
+              "fill": {
+                "field": "condition",
+                "scale": "color_wl"
+              },
+              "tooltip": {
+                "signal": "'Categorie: ' +  format(datum.value, '.0f') + ' Jaar: ' + datum.datetime + ' Toestand: ' + datum.condition"
+              }
+            },
+            "hover": {
+              "fill": {
+                "value": "red"
+              }
+            }
+          }
+        }
+      ],
+      "type": "group"
+    }
+  ],
+  "legends": [
+    {
+      "fill": "legend_cd",
+      "title": "Kans categorie",
+      "orient": {"signal": "legend_orient"},
+      "encode": {
+        "title": {
+          "update": {
+            "font": {
+              "value": "Arial"
+            },
+            "fontSize": {
+              "value": 15
+            },
+            "fontWeight": {
+              "value": "normal"
+            },
+            "fill": {
+              "value": "#666666"
+            }
+          }
+        },
+        "labels": {
+          "update": {
+            "fontSize": {
+              "value": 14
+            }
+          }
+        }
+      }
+    },
+    {
+      "fill": "color_wl",
+      "title": "Toestand",
+      "orient": {"signal": "legend_orient"},
+      "encode": {
+        "title": {
+          "update": {
+            "font": {
+              "value": "Arial"
+            },
+            "fontSize": {
+              "value": 15
+            },
+            "fontWeight": {
+              "value": "normal"
+            },
+            "fill": {
+              "value": "#666666"
+            }
+          }
+        },
+        "labels": {
+          "update": {
+            "fontSize": {
+              "value": 14
+            },
+            "limit": {
+              "value": 300
+            }
+          }
+        }
+      }
+    }
+  ]
+}
